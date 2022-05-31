@@ -38,10 +38,12 @@ public class Loading extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        loading_value.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        loading_bar.setForeground(new java.awt.Color(102, 204, 0));
+
+        loading_value.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         loading_value.setText("0 %");
 
-        loading_label.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        loading_label.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         loading_label.setText("Loading ...");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/formjpg/circle-logo.png"))); // NOI18N
@@ -110,7 +112,7 @@ public class Loading extends javax.swing.JFrame {
        Loading apes1 = new Loading();
         apes1.setVisible(true);
         
-                  try{
+    try{
          
          for(int i = 0; i <= 100; i++){
              Thread.sleep(30);

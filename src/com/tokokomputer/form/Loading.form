@@ -92,11 +92,16 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JProgressBar" name="loading_bar">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="cc" red="66" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="loading_value">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="11" style="0"/>
+              <Font name="Verdana" size="11" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0 %"/>
           </Properties>
@@ -104,7 +109,7 @@
         <Component class="javax.swing.JLabel" name="loading_label">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="11" style="0"/>
+              <Font name="Verdana" size="11" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Loading ..."/>
           </Properties>
