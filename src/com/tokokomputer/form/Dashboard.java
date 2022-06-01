@@ -4,6 +4,7 @@
  */
 package com.tokokomputer.form;
 
+import com.mysql.cj.xdevapi.Statement;
 import com.tokokomputer.controller.Koneksi;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,12 +26,40 @@ ResultSet rs = null;
 PreparedStatement pst = null;
 String id;
 
-    public void reset(){
-        id_karyawan.setText("");
-        txt_nama.setText("");
-        txt_jabatan.setText("");
-        
+
+public void reset(){
+   id_karyawan.setText("");
+   txt_nama.setText("");
+   txt_jabatan.setText("");
+   password.setText("");
+}
+public void kliktable(){
+        int baris =table_karyawan.getSelectedRow();
+        id_karyawan.setText((String)table_karyawan.getValueAt(baris, 0));
+        txt_nama.setText((String) table_karyawan.getValueAt (baris,1));
+        txt_jabatan.setText((String) table_karyawan.getValueAt (baris,2));
     }
+public void table() {
+    DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id Karyawan");
+        tbl.addColumn("Nama Karyawan");
+        tbl.addColumn("Jabatan");
+        tbl.addColumn("Jenis Kelamin");
+        try {
+            String sql = "Select * from karyawan";
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res =  stm.executeQuery(sql);
+            while (res.next()){
+                tbl.addRow(new Object[] {res.getString(1),res.getString(2),res.getString(3),res.getString(4)});
+            }table_karyawan.setModel(tbl);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        }
+        
+        
+    
 
      void setHover(JPanel panel){
         panel.setBackground(new Color(0,204,153));
@@ -44,6 +74,8 @@ String id;
         panggil_nama();
         jabatan();
         id_karyawan();
+        table();
+        id_karyawan.disable();
 
 
     }
@@ -55,7 +87,8 @@ String id;
         panggil_nama();
         jabatan();
         id_karyawan();
-
+        table();
+        id_karyawan.disable();
 
         
     }  public void id_karyawan() throws java.sql.SQLException{
@@ -105,6 +138,7 @@ String id;
 
         jPanel3 = new javax.swing.JPanel();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jButton12 = new javax.swing.JButton();
         Menu = new javax.swing.JPanel();
         Info_Login = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -140,7 +174,7 @@ String id;
         jLabel20 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_karyawan = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         id_karyawan = new javax.swing.JTextField();
@@ -155,6 +189,7 @@ String id;
         box_jenis_kelamin = new javax.swing.JComboBox<>();
         jLabel44 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
+        jButton13 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
         Dashboard = new javax.swing.JPanel();
@@ -237,6 +272,8 @@ String id;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 437, Short.MAX_VALUE)
         );
+
+        jButton12.setText("jButton12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -582,8 +619,8 @@ String id;
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(255, 204, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_karyawan.setBackground(new java.awt.Color(255, 204, 51));
+        table_karyawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -591,38 +628,51 @@ String id;
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Karyawan", "Nama", "Jabatan", "Jenis Kelamin"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        table_karyawan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_karyawanMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table_karyawan);
 
         jPanel10.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 270, 430));
 
         jPanel12.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel35.setText("ID Karyawan");
+        jPanel12.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         id_karyawan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 id_karyawanActionPerformed(evt);
             }
         });
+        jPanel12.add(id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 11, 173, -1));
 
         jLabel36.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel36.setText("Nama");
+        jPanel12.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 44, -1, -1));
 
         txt_nama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_namaActionPerformed(evt);
             }
         });
+        jPanel12.add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 42, 173, -1));
 
         jLabel37.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel37.setText("Jabatan");
+        jPanel12.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 82, -1, -1));
+        jPanel12.add(txt_jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 80, 173, -1));
 
         jLabel38.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel38.setText("Jenis kelamin");
+        jPanel12.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 151, -1, -1));
 
         jButton1.setText("Simpan");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -630,6 +680,7 @@ String id;
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
 
         jButton2.setText("Update");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -637,89 +688,33 @@ String id;
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
 
         jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
 
         box_jenis_kelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        jPanel12.add(box_jenis_kelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 149, 172, -1));
 
         jLabel44.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jLabel44.setText("Password");
+        jPanel12.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jPanel12.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 118, 173, -1));
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel36)
-                            .addComponent(jLabel37)
-                            .addComponent(jLabel44))
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jButton2)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_jabatan, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txt_nama, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
-                                .addContainerGap())))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addComponent(jLabel38)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(box_jenis_kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel12Layout.createSequentialGroup()
-                                        .addComponent(jLabel35)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(id_karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel12Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(119, 119, 119)
-                                        .addComponent(jButton3)))))
-                        .addContainerGap())))
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(id_karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(txt_jabatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel44)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box_jenis_kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
-        );
+        jButton13.setText("Clear");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 67, -1));
 
-        jPanel10.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 280, 230));
+        jPanel10.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 280, 280));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1350,6 +1345,7 @@ String id;
         getContentPane().add(Main_Form, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 590, 670));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_DashboardMouseClicked
@@ -1523,16 +1519,18 @@ String id;
     try {
            
        String sql =
-        "INSERT into karyawan VALUES ('"+id_karyawan.getText()
-               +"','"+txt_nama.getText ()
+        "INSERT into karyawan (nama_karyawan,jabatan,jenis_kelamin,password) values"
+               +"('"+txt_nama.getText()
                +"','"+txt_jabatan.getText()
                +"','"+box_jenis_kelamin.getSelectedItem()
                +"','"+password.getText()+"')";
+               
        java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
        pst.execute();
        JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
        dispose();
+       reset();
        } catch (Exception e){
            JOptionPane.showMessageDialog(this, e.getMessage());
            
@@ -1540,7 +1538,22 @@ String id;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        try{
+        String sql = "update karyawan set nama_karyawan='"+txt_nama.getText()
+                +"',jabatan='"+txt_jabatan.getText()
+                +"',jenis_kelamin='"+box_jenis_kelamin.getSelectedItem()
+                +"',password='"+password.getText()
+                +"' where id_karyawan='"+id_karyawan.getText()+"'";
+    
+     
+            pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data telah diupdate");
+            reset();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }table();
+                
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
@@ -1629,6 +1642,27 @@ String id;
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_namaActionPerformed
 
+    private void table_karyawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_karyawanMouseClicked
+    kliktable();
+    }//GEN-LAST:event_table_karyawanMouseClicked
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    reset();
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String sql = "delete from karyawan where id_karyawan = '"+id_karyawan.getText()+"'";
+        try {
+            pst =conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "data gagal dihapus");
+        }
+        table();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1697,6 +1731,8 @@ String id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1777,7 +1813,6 @@ String id;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
@@ -1792,6 +1827,7 @@ String id;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JPasswordField password;
+    private javax.swing.JTable table_karyawan;
     private javax.swing.JTextField txt_jabatan;
     private javax.swing.JTextField txt_nama;
     // End of variables declaration//GEN-END:variables
