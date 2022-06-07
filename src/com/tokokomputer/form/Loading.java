@@ -38,7 +38,7 @@ public class Loading extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        loading_bar.setForeground(new java.awt.Color(102, 204, 0));
+        loading_bar.setForeground(new java.awt.Color(127, 255, 0));
 
         loading_value.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         loading_value.setText("0 %");
