@@ -22,7 +22,7 @@ public static Connection getKoneksi(){
             url="jdbc:mysql://localhost:3306/tokokomputer";
             String username ="root";
             String password = "";
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             koneksi = DriverManager.getConnection(url, username, password);   
         } catch(SQLException t) {
             JOptionPane.showMessageDialog(null, "Database Tidak Terhubung" + t.getMessage());
