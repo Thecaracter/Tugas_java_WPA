@@ -5,6 +5,7 @@
  */
 package com.tokokomputer.form;
 
+import static com.itextpdf.xmp.XMPMetaFactory.reset;
 import com.tokokomputer.controller.Koneksi;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -18,9 +19,9 @@ public class layanan_jual extends javax.swing.JFrame {
    
     public void kliktable_layananpenjualan(){
         int baris =tampil_barang.getSelectedRow();
-        cbNmBarang.setText((String)tampil_barang.getValueAt(baris, 1));
-        txtjenis.setText((String)tampil_barang.getValueAt(baris, 2));
-        txtHarga.setText((String) tampil_barang.getValueAt (baris,3));
+        txt_namabarang.setText((String)tampil_barang.getValueAt(baris, 1));
+        txt_jenisbarang.setText((String)tampil_barang.getValueAt(baris, 2));
+        txt_HargaBarang.setText((String) tampil_barang.getValueAt (baris,3));
         
        
     }
@@ -90,8 +91,8 @@ public class layanan_jual extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtHarga = new javax.swing.JTextField();
-        txtjenis = new javax.swing.JTextField();
+        txt_HargaBarang = new javax.swing.JTextField();
+        txt_jenisbarang = new javax.swing.JTextField();
         txtJmlHarga = new javax.swing.JTextField();
         txtJmlKembalian = new javax.swing.JTextField();
         btnHapusItem = new javax.swing.JButton();
@@ -107,12 +108,14 @@ public class layanan_jual extends javax.swing.JFrame {
         btnHitungJmlHarga1 = new javax.swing.JButton();
         btnEditItem = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        txtJmlBeli = new javax.swing.JTextField();
+        txt_jumlahbeli = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tampil_barang = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        cbNmBarang = new javax.swing.JTextField();
+        txt_namabarang = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txt_id_barang = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Kasir Sederhana");
@@ -139,24 +142,24 @@ public class layanan_jual extends javax.swing.JFrame {
         jLabel6.setText("Kembalian");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
-        txtHarga.setEditable(false);
-        txtHarga.setBackground(new java.awt.Color(102, 255, 255));
-        txtHarga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtHarga.setText("0");
-        getContentPane().add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 140, -1));
+        txt_HargaBarang.setEditable(false);
+        txt_HargaBarang.setBackground(new java.awt.Color(102, 255, 255));
+        txt_HargaBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_HargaBarang.setText("0");
+        getContentPane().add(txt_HargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 140, -1));
 
-        txtjenis.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtjenis.addActionListener(new java.awt.event.ActionListener() {
+        txt_jenisbarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_jenisbarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtjenisActionPerformed(evt);
+                txt_jenisbarangActionPerformed(evt);
             }
         });
-        txtjenis.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_jenisbarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtjenisKeyReleased(evt);
+                txt_jenisbarangKeyReleased(evt);
             }
         });
-        getContentPane().add(txtjenis, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 140, -1));
+        getContentPane().add(txt_jenisbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 140, -1));
 
         txtJmlHarga.setEditable(false);
         txtJmlHarga.setBackground(new java.awt.Color(102, 255, 255));
@@ -295,19 +298,19 @@ public class layanan_jual extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
 
-        txtJmlBeli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtJmlBeli.setText("0");
-        txtJmlBeli.addActionListener(new java.awt.event.ActionListener() {
+        txt_jumlahbeli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_jumlahbeli.setText("0");
+        txt_jumlahbeli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtJmlBeliActionPerformed(evt);
+                txt_jumlahbeliActionPerformed(evt);
             }
         });
-        txtJmlBeli.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_jumlahbeli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtJmlBeliKeyReleased(evt);
+                txt_jumlahbeliKeyReleased(evt);
             }
         });
-        getContentPane().add(txtJmlBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 140, -1));
+        getContentPane().add(txt_jumlahbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 140, -1));
 
         tampil_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,33 +330,46 @@ public class layanan_jual extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tampil_barang);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 40, 530, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 40, 530, 90));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Harga Barang");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
-        cbNmBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbNmBarang.addActionListener(new java.awt.event.ActionListener() {
+        txt_namabarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_namabarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNmBarangActionPerformed(evt);
+                txt_namabarangActionPerformed(evt);
             }
         });
-        cbNmBarang.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_namabarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                cbNmBarangKeyReleased(evt);
+                txt_namabarangKeyReleased(evt);
             }
         });
-        getContentPane().add(cbNmBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 140, -1));
+        getContentPane().add(txt_namabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 140, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1130, 540));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jLabel1.setText("Id Barang");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+
+        txt_id_barang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_id_barangActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_id_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 140, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 550));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtjenisKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtjenisKeyReleased
+    private void txt_jenisbarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jenisbarangKeyReleased
         // TODO add your handling code here:
 //        if(txtJmlBeli.getText().equals("") || txtJmlBeli.getText().equals("0")){
 //           JOptionPane.showMessageDialog(rootPane, "Jumlah Beli Tidak Boleh Kosong!!!"); 
@@ -365,7 +381,7 @@ public class layanan_jual extends javax.swing.JFrame {
 //            txtJmlHarga.setText(String.valueOf(jumlahHarga));
 //        }
         
-    }//GEN-LAST:event_txtjenisKeyReleased
+    }//GEN-LAST:event_txt_jenisbarangKeyReleased
 
     private void txtJmlBayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJmlBayarKeyReleased
         
@@ -382,9 +398,9 @@ public class layanan_jual extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJmlBayarKeyReleased
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-        txtjenis.setText("");
-        txtHarga.setText("0");
-        txtjenis.setText("0");
+        txt_jenisbarang.setText("");
+        txt_HargaBarang.setText("0");
+        txt_jenisbarang.setText("0");
         txtJmlHarga.setText("0");
         txtJmlBayar.setText("");
         txtJmlKembalian.setText("0");
@@ -411,9 +427,9 @@ public class layanan_jual extends javax.swing.JFrame {
             
             hitungTotalHarga();
                     
-            txtHarga.setText("");
-            txtjenis.setText("");
-            txtjenis.setText("");
+            txt_HargaBarang.setText("");
+            txt_jenisbarang.setText("");
+            txt_jenisbarang.setText("");
             
             btnEditItem.setEnabled(false);
             btnHapusItem.setEnabled(false);
@@ -460,9 +476,9 @@ public class layanan_jual extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(rootPane, "Transaksi Selesai!!..");
 
-                txtjenis.setText("");
-                txtHarga.setText("0");
-                txtjenis.setText("0");
+                txt_jenisbarang.setText("");
+                txt_HargaBarang.setText("0");
+                txt_jenisbarang.setText("0");
                 txtJmlHarga.setText("0");
                 txtJmlBayar.setText("");
                 txtJmlKembalian.setText("0");
@@ -484,19 +500,19 @@ public class layanan_jual extends javax.swing.JFrame {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         
-        if(cbNmBarang.getText().equals("-- Pilih Barang --")){
+        if(txt_namabarang.getText().equals("-- Pilih Barang --")){
             JOptionPane.showMessageDialog(rootPane, "Pilih Barang terlebih dahulu!!!");
         } else {
             DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
-            int jmlHargaBarang = Integer.parseInt(txtHarga.getText()) * Integer.parseInt(txtJmlBeli.getText());
+            int jmlHargaBarang = Integer.parseInt(txt_HargaBarang.getText()) * Integer.parseInt(txt_jumlahbeli.getText());
 //            model.addRow(new Object[] {cbNmBarang.getText(),txtjenis.getText()});
-            model.addRow(new Object[] {cbNmBarang.getText(), txtHarga.getText(), txtjenis.getText(), jmlHargaBarang});
+            model.addRow(new Object[] {txt_namabarang.getText(), txt_HargaBarang.getText(), txt_jenisbarang.getText(), jmlHargaBarang});
 
             hitungTotalHarga();
            
-          cbNmBarang.setText("");
-          txtHarga.setText("");
-          txtjenis.setText("");
+          txt_namabarang.setText("");
+          txt_HargaBarang.setText("");
+          txt_jenisbarang.setText("");
           
             
           
@@ -512,9 +528,9 @@ public class layanan_jual extends javax.swing.JFrame {
         String b = tblKeranjang.getValueAt(table, 1).toString();
         String c = tblKeranjang.getValueAt(table, 2).toString();
         
-        txtjenis.setText(a);
-        txtHarga.setText(b);
-        txtjenis.setText(c);
+        txt_jenisbarang.setText(a);
+        txt_HargaBarang.setText(b);
+        txt_jenisbarang.setText(c);
         
         btnEditItem.setEnabled(true);
         btnHapusItem.setEnabled(true);
@@ -522,11 +538,35 @@ public class layanan_jual extends javax.swing.JFrame {
     }//GEN-LAST:event_tblKeranjangMouseClicked
 
     private void btnHitungJmlHarga1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungJmlHarga1ActionPerformed
-        Double harga,jbeli,hasil;
-        harga=Double.parseDouble(txtHarga.getText());
-        jbeli=Double.parseDouble(txtJmlBeli.getText());
-        hasil=harga*jbeli;
-        txtJmlHarga.setText(String.valueOf(hasil));      
+       try {
+           
+       String sql =
+        "INSERT into detailpembelian (id_pembelian,nama_barang,harga_beli,jumlah_barang,total_pembelian) values"
+               +"('"+txt_id_barang.getText()
+               +"','"+txt_namabarang.getText()
+               +"','"+txt_jenisbarang.getText()
+               +"','"+txt_HargaBarang.getText()
+               +"','"+txt_jumlahbeli.getText()+"')";
+               
+       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+       pst.execute();
+       JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
+       dispose();
+       reset();
+       } catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+           
+       }
+        Double harga,hasil;
+        harga=Double.parseDouble(txt_HargaBarang.getText());   
+        Integer jbeli ;
+        jbeli=Integer.parseInt(txt_jumlahbeli.getText());
+        
+         hasil=harga*jbeli;
+        txtJmlHarga.setText(String.valueOf(hasil));    
+
+        
     }//GEN-LAST:event_btnHitungJmlHarga1ActionPerformed
 
     private void btnEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditItemActionPerformed
@@ -535,18 +575,18 @@ public class layanan_jual extends javax.swing.JFrame {
                 
         if(i >= 0) 
         {
-            model.setValueAt(txtjenis.getText(), i, 0);
-            model.setValueAt(txtHarga.getText(), i, 1);
-            model.setValueAt(txtjenis.getText(), i, 2);
+            model.setValueAt(txt_jenisbarang.getText(), i, 0);
+            model.setValueAt(txt_HargaBarang.getText(), i, 1);
+            model.setValueAt(txt_jenisbarang.getText(), i, 2);
            
-            int jmlHargaBarang = Integer.parseInt(txtHarga.getText()) * Integer.parseInt(txtjenis.getText());
+            int jmlHargaBarang = Integer.parseInt(txt_HargaBarang.getText()) * Integer.parseInt(txt_jenisbarang.getText());
     
             model.setValueAt(jmlHargaBarang, i, 3);
             hitungTotalHarga();
             
-            txtHarga.setText("");
-            txtjenis.setText("");
-            txtjenis.setText("");
+            txt_HargaBarang.setText("");
+            txt_jenisbarang.setText("");
+            txt_jenisbarang.setText("");
             
             btnEditItem.setEnabled(false);
             btnHapusItem.setEnabled(false);
@@ -559,9 +599,9 @@ public class layanan_jual extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        txtjenis.setText("");
-        txtHarga.setText("");
-        txtjenis.setText("");
+        txt_jenisbarang.setText("");
+        txt_HargaBarang.setText("");
+        txt_jenisbarang.setText("");
         
         btnEditItem.setEnabled(false);
         btnHapusItem.setEnabled(false);
@@ -569,36 +609,40 @@ public class layanan_jual extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtJmlHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJmlHargaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtJmlHargaActionPerformed
 
     private void txtJmlKembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJmlKembalianActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJmlKembalianActionPerformed
 
-    private void txtJmlBeliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJmlBeliKeyReleased
+    private void txt_jumlahbeliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jumlahbeliKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtJmlBeliKeyReleased
+    }//GEN-LAST:event_txt_jumlahbeliKeyReleased
 
-    private void txtjenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtjenisActionPerformed
+    private void txt_jenisbarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_jenisbarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtjenisActionPerformed
+    }//GEN-LAST:event_txt_jenisbarangActionPerformed
+
+    private void txt_namabarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_namabarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_namabarangActionPerformed
+
+    private void txt_namabarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_namabarangKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_namabarangKeyReleased
+
+    private void txt_jumlahbeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_jumlahbeliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_jumlahbeliActionPerformed
 
     private void tampil_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tampil_barangMouseClicked
         kliktable_layananpenjualan();
     }//GEN-LAST:event_tampil_barangMouseClicked
 
-    private void cbNmBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNmBarangActionPerformed
+    private void txt_id_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_barangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbNmBarangActionPerformed
-
-    private void cbNmBarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbNmBarangKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbNmBarangKeyReleased
-
-    private void txtJmlBeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJmlBeliActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtJmlBeliActionPerformed
+    }//GEN-LAST:event_txt_id_barangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -647,8 +691,8 @@ public class layanan_jual extends javax.swing.JFrame {
     private javax.swing.JButton btnHitungJmlKembalian;
     private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnTambah;
-    private javax.swing.JTextField cbNmBarang;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -661,11 +705,13 @@ public class layanan_jual extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tampil_barang;
     private javax.swing.JTable tblKeranjang;
-    private javax.swing.JTextField txtHarga;
     private javax.swing.JTextField txtJmlBayar;
-    private javax.swing.JTextField txtJmlBeli;
     private javax.swing.JTextField txtJmlHarga;
     private javax.swing.JTextField txtJmlKembalian;
-    private javax.swing.JTextField txtjenis;
+    private javax.swing.JTextField txt_HargaBarang;
+    private javax.swing.JTextField txt_id_barang;
+    private javax.swing.JTextField txt_jenisbarang;
+    private javax.swing.JTextField txt_jumlahbeli;
+    private javax.swing.JTextField txt_namabarang;
     // End of variables declaration//GEN-END:variables
 }

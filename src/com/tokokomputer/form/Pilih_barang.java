@@ -130,7 +130,7 @@ public class Pilih_barang extends javax.swing.JFrame {
         int baris = tampil_barang.getSelectedRow();
         String nama_barang = tampil_barang.getModel().getValueAt(baris, 1).toString();
         Dashboard db = new Dashboard();
-        db.txtNmBarang.setText((String)tampil_barang.getValueAt(baris, 1));
+        db.NmBarang.setText((String)tampil_barang.getValueAt(baris, 1));
         System.out.print(nama_barang);
     }//GEN-LAST:event_jButton1MouseClicked
 
