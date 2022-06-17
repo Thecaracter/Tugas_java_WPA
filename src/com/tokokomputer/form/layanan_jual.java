@@ -94,9 +94,9 @@ new Timer(1000, taskPerformer).start();
                 } else if (ID.length() == 4) {
                     Nol = "";
                 }
-                txt_id_penjualan.setText("TR" + Nol + ID);
+                txt_id_penjualan.setText("RI" + Nol + ID);
             } else {
-                txt_id_penjualan.setText("TR0001");
+                txt_id_penjualan.setText("RI0001");
             
                     
         } 
@@ -210,8 +210,6 @@ new Timer(1000, taskPerformer).start();
 
         jScrollPane2 = new javax.swing.JScrollPane();
         tblKeranjang = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tampil_barang = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_id_barang = new javax.swing.JTextField();
@@ -245,6 +243,9 @@ new Timer(1000, taskPerformer).start();
         txt_id_penjualan = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         tanggal_beli = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tampil_barang = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Kasir Sederhana");
@@ -270,26 +271,6 @@ new Timer(1000, taskPerformer).start();
         jScrollPane2.setViewportView(tblKeranjang);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 550, 500));
-
-        tampil_barang.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tampil_barang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tampil_barangMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tampil_barang);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 40, 530, 100));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -522,6 +503,41 @@ new Timer(1000, taskPerformer).start();
 
         tanggal_beli.setText("00.00.00");
         jPanel1.add(tanggal_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+
+        tampil_barang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tampil_barang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tampil_barangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tampil_barang);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, 100));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 150, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 600));
 
@@ -852,6 +868,41 @@ new Timer(1000, taskPerformer).start();
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJmlBayarActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+          String key=jTextField1.getText();
+        System.out.println(key);  
+        
+        if(key!=""){
+            DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id Barang");
+        tbl.addColumn("Nama Barang");
+        tbl.addColumn("Jenis Produk");
+        tbl.addColumn("Harga Produk");
+        try {
+            String sql = "Select * from barang where id_barang like '%" + jTextField1.getText() + "%'" +
+                          "or nama_barang like '%" + jTextField1.getText() + "%'";
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res =  stm.executeQuery(sql);
+            while (res.next()){
+                tbl.addRow(new Object[] {res.getString(1),res.getString(2),res.getString(3),res.getString(6)});
+            }tampil_barang.setModel(tbl);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        }else{
+            tampil();
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -920,6 +971,7 @@ new Timer(1000, taskPerformer).start();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tampil_barang;
     private javax.swing.JLabel tanggal_beli;
     private javax.swing.JTable tblKeranjang;
