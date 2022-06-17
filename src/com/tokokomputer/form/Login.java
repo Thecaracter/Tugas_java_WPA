@@ -52,7 +52,6 @@ PreparedStatement pst = null;
             txt_pass.setText(null);
            }
            else if(txt_user.getText().equals(rs.getString("nama_karyawan")) || txt_pass.getText().equals(rs.getString("password"))){
-                   JOptionPane.showMessageDialog(null, "Sukses Login");
                    this.setVisible(false);
                    new Dashboard(rs.getString(1)).setVisible(true);
                }

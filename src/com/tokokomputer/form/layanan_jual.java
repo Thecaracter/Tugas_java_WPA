@@ -272,7 +272,7 @@ new Timer(1000, taskPerformer).start();
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 550, 500));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(15, 247, 147));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -337,7 +337,7 @@ new Timer(1000, taskPerformer).start();
         jPanel1.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
 
         txtJmlKembalian.setEditable(false);
-        txtJmlKembalian.setBackground(new java.awt.Color(102, 255, 255));
+        txtJmlKembalian.setBackground(new java.awt.Color(204, 204, 204));
         txtJmlKembalian.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtJmlKembalian.setText("0");
         txtJmlKembalian.addActionListener(new java.awt.event.ActionListener() {
@@ -382,7 +382,7 @@ new Timer(1000, taskPerformer).start();
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 30, -1));
 
         txtJmlHarga.setEditable(false);
-        txtJmlHarga.setBackground(new java.awt.Color(102, 255, 255));
+        txtJmlHarga.setBackground(new java.awt.Color(204, 204, 204));
         txtJmlHarga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtJmlHarga.setText("0");
         txtJmlHarga.addActionListener(new java.awt.event.ActionListener() {
@@ -433,7 +433,7 @@ new Timer(1000, taskPerformer).start();
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
 
         txt_HargaBarang.setEditable(false);
-        txt_HargaBarang.setBackground(new java.awt.Color(102, 255, 255));
+        txt_HargaBarang.setBackground(new java.awt.Color(204, 204, 204));
         txt_HargaBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_HargaBarang.setText("0");
         jPanel1.add(txt_HargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 140, -1));

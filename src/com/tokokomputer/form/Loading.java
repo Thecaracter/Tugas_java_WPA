@@ -38,7 +38,7 @@ public class Loading extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        loading_bar.setForeground(new java.awt.Color(127, 255, 0));
+        loading_bar.setForeground(new java.awt.Color(15, 247, 147));
 
         loading_value.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         loading_value.setText("0 %");
@@ -134,7 +134,6 @@ public class Loading extends javax.swing.JFrame {
                  apes1.loading_label.setText("Memuat Aplikasi Berhasil");
              }
              if(i==100){
-                 JOptionPane.showMessageDialog(apes1, "Aplikasi berhasil dijalankan", "Pesan", JOptionPane.INFORMATION_MESSAGE);
                  new Login().setVisible(true);
                  apes1.setVisible(false);
              }
