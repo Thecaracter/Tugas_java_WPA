@@ -194,7 +194,7 @@ public void table_pegawai() {
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        penjualan = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         Pegawai = new javax.swing.JPanel();
@@ -658,7 +658,7 @@ public void table_pegawai() {
 
         jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 0, -1, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        penjualan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -669,7 +669,7 @@ public void table_pegawai() {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(penjualan);
 
         jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 550, 430));
 
@@ -1317,6 +1317,23 @@ public void table_pegawai() {
         Main_Form.revalidate();
     }//GEN-LAST:event_Btn_PenjualanMousePressed
 
+    
+     public void anjay(){
+        try{
+           String sql = "SELECT id_karyawan FROM karyawan where id_karyawan =" + id;
+           java.sql.Connection conn=(Connection)Koneksi.getKoneksi();
+           java.sql.PreparedStatement pst = conn.prepareCall(sql);
+           java.sql.ResultSet rs=pst.executeQuery();
+          
+           if(rs.next()){
+           new layanan_jual(rs.getString(1)).setVisible(true);
+               }
+               
+     
+       }catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+       }
+     }
     private void jLabel21MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel21MousePressed
@@ -1581,7 +1598,8 @@ public void table_pegawai() {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-        new layanan_jual().setVisible(true);
+
+        anjay();
     }//GEN-LAST:event_jLabel12MousePressed
 
     /**
@@ -1709,7 +1727,7 @@ public void table_pegawai() {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
+    public javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -1728,7 +1746,6 @@ public void table_pegawai() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
@@ -1738,6 +1755,7 @@ public void table_pegawai() {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPasswordField password;
+    private javax.swing.JTable penjualan;
     private javax.swing.JTable table_karyawan;
     private javax.swing.JTextField txt_jabatan;
     private javax.swing.JTextField txt_nama;
