@@ -38,6 +38,37 @@ public void kliktable(){
         txt_nama.setText((String) table_karyawan.getValueAt (baris,1));
         txt_jabatan.setText((String) table_karyawan.getValueAt (baris,2));
     }
+public void table_penjualan(){
+    DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id Penjualan");
+        tbl.addColumn("Tanggal Transaksi");
+        tbl.addColumn("Jenis Total");
+        tbl.addColumn("Tunai");
+        tbl.addColumn("Kembali");
+        tbl.addColumn("ID Barang");
+        tbl.addColumn("Kuantitas");
+        try {
+            String sql = "SELECT p.id_penjualan, p.tanggal_transaksi,p.total,p.tunai,p.kembali,d.id_barang,d.jumlah_penjualan,p.id_karyawan FROM penjualan p INNER JOIN detailpenjualan d ON p.id_penjualan=d.id_penjualan;";
+            java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            System.out.println(res);
+            while (res.next()) {
+                tbl.addRow(new Object[]{
+                    res.getString(1),
+                    res.getString(2),
+                    res.getString(3),
+                    res.getString(4),
+                    res.getString(5),
+                    res.getString(6),
+                    res.getString(7),
+                });
+            }
+            penjualan.setModel(tbl);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+}
 public void table_pegawai() {
     DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("Id Karyawan");
@@ -75,6 +106,7 @@ public void table_pegawai() {
         id_karyawan();
         table_pegawai();
         id_karyawan.disable();
+        table_penjualan();
         
         
 
@@ -90,7 +122,7 @@ public void table_pegawai() {
         id_karyawan();
         table_pegawai();
         id_karyawan.disable();
-        
+        table_penjualan();
         
 
         
@@ -687,7 +719,7 @@ public void table_pegawai() {
 
         jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 540));
 
-        Penjualan.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 520));
+        Penjualan.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 550));
 
         Main_Form.add(Penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 660));
 
@@ -1598,7 +1630,7 @@ public void table_pegawai() {
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-
+        
         lempardata_layananjual();
     }//GEN-LAST:event_jLabel12MousePressed
 

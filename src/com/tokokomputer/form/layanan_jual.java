@@ -158,6 +158,23 @@ new Timer(1000, taskPerformer).start();
     txt_id_penjualan.setEnabled(false);
 
 }
+     public void balikdata_layananjual(){
+        try{
+           String sql = "SELECT id_karyawan FROM karyawan where id_karyawan =" + id;
+           java.sql.Connection conn=(Connection)Koneksi.getKoneksi();
+           java.sql.PreparedStatement pst = conn.prepareCall(sql);
+           java.sql.ResultSet rs=pst.executeQuery();
+          
+           if(rs.next()){
+           new Dashboard(rs.getString(1)).setVisible(true);
+           this.setVisible(false);
+               }
+               
+     
+       }catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+       }
+     }
     
     
     public layanan_jual() throws SQLException {
@@ -228,7 +245,6 @@ new Timer(1000, taskPerformer).start();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtJmlHarga = new javax.swing.JTextField();
-        btnHitungJmlHarga1 = new javax.swing.JButton();
         btnTambah = new javax.swing.JButton();
         txt_jumlahbeli = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -392,15 +408,6 @@ new Timer(1000, taskPerformer).start();
         });
         jPanel1.add(txtJmlHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 140, -1));
 
-        btnHitungJmlHarga1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnHitungJmlHarga1.setText("Hitung Total");
-        btnHitungJmlHarga1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHitungJmlHarga1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnHitungJmlHarga1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 410, 185, -1));
-
         btnTambah.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnTambah.setText("Tambah Ke Keranjang");
         btnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -524,6 +531,7 @@ new Timer(1000, taskPerformer).start();
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, 100));
 
+        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -643,7 +651,6 @@ new Timer(1000, taskPerformer).start();
        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
        pst.execute();
        JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
-       dispose();
        reset();
        } catch (Exception ex){
            JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -728,11 +735,12 @@ new Timer(1000, taskPerformer).start();
                 btnEditItem.setEnabled(false);
                 btnHapusItem.setEnabled(false);
                 btnTambah.setEnabled(true);
-            
+          
             }catch(Exception e){
                 System.out.println(e);
             } 
         }
+        balikdata_layananjual();
         
     }//GEN-LAST:event_btnCetakActionPerformed
 
@@ -774,16 +782,6 @@ new Timer(1000, taskPerformer).start();
         btnHapusItem.setEnabled(true);
         btnTambah.setEnabled(false);
     }//GEN-LAST:event_tblKeranjangMouseClicked
-
-    private void btnHitungJmlHarga1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungJmlHarga1ActionPerformed
-
-        
-        Double harga,jbeli,hasil;
-        harga=Double.parseDouble(txt_HargaBarang.getText());
-        jbeli=Double.parseDouble(txt_jumlahbeli.getText());
-        hasil=harga*jbeli;
-        txtJmlHarga.setText(String.valueOf(hasil));      
-    }//GEN-LAST:event_btnHitungJmlHarga1ActionPerformed
 
     private void btnEditItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditItemActionPerformed
         DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
@@ -877,7 +875,7 @@ new Timer(1000, taskPerformer).start();
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-          String key=jTextField1.getText();
+        String key=jTextField1.getText();
         System.out.println(key);  
         
         if(key!=""){
@@ -951,7 +949,6 @@ new Timer(1000, taskPerformer).start();
     private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnEditItem;
     private javax.swing.JButton btnHapusItem;
-    private javax.swing.JButton btnHitungJmlHarga1;
     private javax.swing.JButton btnHitungJmlKembalian;
     private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnTambah;
