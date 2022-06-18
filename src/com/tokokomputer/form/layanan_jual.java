@@ -876,8 +876,6 @@ new Timer(1000, taskPerformer).start();
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String key=jTextField1.getText();
-        System.out.println(key);  
-        
         if(key!=""){
             DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("Id Barang");
