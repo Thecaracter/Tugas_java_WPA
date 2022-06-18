@@ -52,7 +52,6 @@ public void table_penjualan(){
             java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
-            System.out.println(res);
             while (res.next()) {
                 tbl.addRow(new Object[]{
                     res.getString(1),
@@ -229,6 +228,7 @@ public void table_pegawai() {
         penjualan = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
+        Cari_penjualan = new javax.swing.JTextField();
         Pegawai = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -716,6 +716,13 @@ public void table_pegawai() {
         jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel54.setText("Jumlah Kembalian");
         jPanel13.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 323, -1, -1));
+
+        Cari_penjualan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Cari_penjualanKeyReleased(evt);
+            }
+        });
+        jPanel13.add(Cari_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 140, -1));
 
         jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 540));
 
@@ -1634,6 +1641,43 @@ public void table_pegawai() {
         lempardata_layananjual();
     }//GEN-LAST:event_jLabel12MousePressed
 
+    private void Cari_penjualanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cari_penjualanKeyReleased
+        String key=Cari_penjualan.getText();
+        System.out.println(key);  
+        
+        if(key!=""){
+            DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id Penjualan");
+        tbl.addColumn("Tanggal Transaksi");
+        tbl.addColumn("Jenis Total");
+        tbl.addColumn("Tunai");
+        tbl.addColumn("Kembali");
+        tbl.addColumn("ID Barang");
+        tbl.addColumn("Kuantitas");
+        try {
+            String sql = "SELECT p.id_penjualan, p.tanggal_transaksi,p.total,p.tunai,p.kembali,d.id_barang,d.jumlah_penjualan,p.id_karyawan FROM penjualan p INNER JOIN detailpenjualan d ON p.id_penjualan=d.id_penjualan where p.id_penjualan LIKE '%" + Cari_penjualan.getText() + "%'";
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res =  stm.executeQuery(sql);
+            while (res.next()){
+                tbl.addRow(new Object[] {
+                    res.getString(1),
+                    res.getString(2),
+                    res.getString(3),
+                    res.getString(4),
+                    res.getString(5),
+                    res.getString(6),
+                    res.getString(7),
+                });
+            }penjualan.setModel(tbl);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        }else{
+            table_penjualan();
+        }
+    }//GEN-LAST:event_Cari_penjualanKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1682,6 +1726,7 @@ public void table_pegawai() {
     private javax.swing.JPanel Btn_Pegawai;
     private javax.swing.JPanel Btn_Pembelian;
     public javax.swing.JPanel Btn_Penjualan;
+    private javax.swing.JTextField Cari_penjualan;
     private javax.swing.JPanel Dashboard;
     private javax.swing.JPanel Info_Login;
     private javax.swing.JPanel Jadwal;
