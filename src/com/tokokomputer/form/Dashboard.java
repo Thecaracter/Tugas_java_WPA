@@ -6,6 +6,8 @@ package com.tokokomputer.form;
 
 import com.tokokomputer.controller.Koneksi;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -154,7 +156,12 @@ public void  panggil_table_barang(){
         table_penjualan();
         panggil_table_barang();
         table_penjualan();
+        
+        Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = layar.width / 2  - this.getSize().width / 2;
+        int y = layar.height / 2 - this.getSize().height / 2;
 
+        this.setLocation(x, y);
 
     }
     
@@ -170,6 +177,12 @@ public void  panggil_table_barang(){
         table_penjualan();
         panggil_table_barang();
         table_penjualan();
+        
+        Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = layar.width / 2  - this.getSize().width / 2;
+        int y = layar.height / 2 - this.getSize().height / 2;
+
+        this.setLocation(x, y);
         
     }  public void id_karyawan(){
             try {
@@ -381,6 +394,11 @@ public void  panggil_table_barang(){
         jButton12.setText("jButton12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Menu.setBackground(new java.awt.Color(255, 255, 255));
@@ -676,6 +694,11 @@ public void  panggil_table_barang(){
         Menu.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 50, 50));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/calender.png"))); // NOI18N
 
@@ -1885,7 +1908,7 @@ public void  panggil_table_barang(){
 
     private void Cari_penjualanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cari_penjualanKeyReleased
         String key=Cari_penjualan.getText();
-        System.out.println(key);  
+          
         
         if(key!=""){
             DefaultTableModel tbl = new DefaultTableModel();
@@ -1991,7 +2014,7 @@ public void  panggil_table_barang(){
     }//GEN-LAST:event_table_barangMouseClicked
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-       lempardata_layananjual();
+      
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void hapus_form_penjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hapus_form_penjualanMouseClicked
@@ -2019,6 +2042,14 @@ public void  panggil_table_barang(){
     private void penjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penjualanMouseClicked
         klik_table_penjualan();
     }//GEN-LAST:event_penjualanMouseClicked
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+     new Form_Jadwal().setVisible(true);
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
