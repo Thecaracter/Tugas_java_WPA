@@ -630,7 +630,7 @@ new Timer(1000, taskPerformer).start();
 
         
         if(txtJmlBayar.getText().equals("")){
-             JOptionPane.showMessageDialog(this, "Tunai Tidak Boleh Kosong");
+             JOptionPane.showMessageDialog(this, "Duitnya dulu ngab");
         
             
         }else{
@@ -650,7 +650,6 @@ new Timer(1000, taskPerformer).start();
        java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
        pst.execute();
-       JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
        reset();
        } catch (Exception ex){
            JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -671,7 +670,7 @@ new Timer(1000, taskPerformer).start();
 
                 
             }
-            JOptionPane.showMessageDialog(this, "Transaksi Berhasil Disimpan");
+            JOptionPane.showMessageDialog(this, "Duitnya udah masuk ngab ,Terimakasih");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
