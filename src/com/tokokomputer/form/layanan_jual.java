@@ -303,10 +303,10 @@ new Timer(1000, taskPerformer).start();
         jPanel1.add(txt_id_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 140, -1));
 
         jLabel9.setText("Jam :");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 30, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 30, -1));
 
         Jam.setText("00.00.00");
-        jPanel1.add(Jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 70, -1));
+        jPanel1.add(Jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 70, -1));
 
         jLabel11.setText("ID Karyawan :");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
@@ -509,7 +509,7 @@ new Timer(1000, taskPerformer).start();
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
         tanggal_beli.setText("00.00.00");
-        jPanel1.add(tanggal_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+        jPanel1.add(tanggal_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         tampil_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -626,13 +626,13 @@ new Timer(1000, taskPerformer).start();
 
     private void btnHitungJmlKembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungJmlKembalianActionPerformed
        
-
-
+      
+       int tampung = Integer.parseInt(txtJmlKembalian.getText());
         
-        if(txtJmlBayar.getText().equals("")){
+       if(tampung < 0){
+           JOptionPane.showMessageDialog(this,"duitnya kurang");
+       }else if(txtJmlBayar.getText().equals("")){
              JOptionPane.showMessageDialog(this, "Duitnya dulu ngab");
-        
-            
         }else{
             
              try {
@@ -682,7 +682,7 @@ new Timer(1000, taskPerformer).start();
         txtJmlKembalian.setText(String.valueOf(hasil));
    
             
-        } 
+     } 
            
         
         
