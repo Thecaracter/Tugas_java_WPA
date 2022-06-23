@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author acer
