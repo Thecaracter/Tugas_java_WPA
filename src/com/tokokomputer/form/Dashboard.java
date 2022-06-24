@@ -42,6 +42,13 @@ public void reset_barang(){
     harga_produk.setText("");
     id_supplier.setText("");
 }
+public void reset_pembelian(){
+    txt_idpembelian.setText("");
+    txt_idpembayaran.setText("");
+    txt_idbarang.setText("");
+    txt_idsupplier.setText("");
+    txt_tglpembelian.setText("");
+}
  public void klik_table_penjualan(){
         int baris = penjualan.getSelectedRow();
         Cari_penjualan.setText((String)penjualan.getValueAt(baris, 0));
@@ -109,6 +116,26 @@ public void table_pegawai() {
         JOptionPane.showMessageDialog(null, e.getMessage());
         }
         }
+public void table_beli() {
+    DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id pembelian");
+        tbl.addColumn("Id pembayaran");
+        tbl.addColumn("Id Barang");
+        tbl.addColumn("Id Supptlier");
+        tbl.addColumn("Tanggal pembelian");
+        
+        try {
+            String sql = "Select * from pembelian";
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res =  stm.executeQuery(sql);
+            while (res.next()){
+                tbl.addRow(new Object[] {res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)});
+            }table_pembelian.setModel(tbl);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        }
 public void  panggil_table_barang(){
     DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("Id Barang");
@@ -156,6 +183,7 @@ public void  panggil_table_barang(){
         table_penjualan();
         panggil_table_barang();
         table_penjualan();
+        table_beli();
         
         Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
         int x = layar.width / 2  - this.getSize().width / 2;
@@ -177,6 +205,7 @@ public void  panggil_table_barang(){
         table_penjualan();
         panggil_table_barang();
         table_penjualan();
+        table_beli();
         
         Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
         int x = layar.width / 2  - this.getSize().width / 2;
@@ -305,24 +334,23 @@ public void  panggil_table_barang(){
         jPanel18 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel47 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        txt_idpembayaran = new javax.swing.JTextField();
+        txt_idpembelian = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txt_idbarang = new javax.swing.JTextField();
         jPanel20 = new javax.swing.JPanel();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        btn_tambah = new javax.swing.JButton();
+        btn_update = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        txt_tglpembelian = new javax.swing.JTextField();
+        txt_idsupplier = new javax.swing.JTextField();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        table_pembelian = new javax.swing.JTable();
         Barang = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -980,24 +1008,24 @@ public void  panggil_table_barang(){
         jLabel47.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel47.setText("ID Pembelian");
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        txt_idpembayaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                txt_idpembayaranActionPerformed(evt);
             }
         });
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        txt_idpembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                txt_idpembelianActionPerformed(evt);
             }
         });
 
         jLabel48.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel48.setText("ID Barang");
 
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txt_idbarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txt_idbarangActionPerformed(evt);
             }
         });
 
@@ -1028,33 +1056,36 @@ public void  panggil_table_barang(){
         jLabel51.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel51.setText("ID Pembayaran");
 
-        jButton8.setText("Simpan");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btn_tambah.setText("Tambah");
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btn_tambahActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Tambah");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btn_update.setText("Update");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btn_updateActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Upadate");
-
-        jButton11.setText("Delete");
-
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                btn_deleteActionPerformed(evt);
             }
         });
 
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        txt_tglpembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                txt_tglpembelianActionPerformed(evt);
+            }
+        });
+
+        txt_idsupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_idsupplierActionPerformed(evt);
             }
         });
 
@@ -1084,27 +1115,23 @@ public void  panggil_table_barang(){
                         .addGap(32, 32, 32)
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_idpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 231, Short.MAX_VALUE))
                             .addGroup(jPanel19Layout.createSequentialGroup()
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_idpembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel19Layout.createSequentialGroup()
                                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
-                                                .addComponent(jButton9)
+                                                .addComponent(btn_tambah)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton10))
-                                            .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btn_update))
+                                            .addComponent(txt_idbarang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(43, 43, 43)
-                                        .addComponent(jButton11))
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btn_delete))
+                                    .addComponent(txt_tglpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_idsupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 124, Short.MAX_VALUE))))))
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jButton8)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1113,35 +1140,34 @@ public void  panggil_table_barang(){
                 .addGap(45, 45, 45)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_idpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_idpembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel51))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_idbarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel48))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_idsupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel52))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tglpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel53))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
+                    .addComponent(btn_tambah)
+                    .addComponent(btn_update)
+                    .addComponent(btn_delete))
                 .addGap(45, 45, 45))
         );
 
         jPanel18.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 390));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        table_pembelian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1152,7 +1178,7 @@ public void  panggil_table_barang(){
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(table_pembelian);
 
         jPanel18.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 570, 90));
 
@@ -1819,33 +1845,47 @@ public void  panggil_table_barang(){
         }
     }//GEN-LAST:event_jPanel2MousePressed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void txt_idpembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idpembayaranActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_txt_idpembayaranActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void txt_idpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idpembelianActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_txt_idpembelianActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txt_idbarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idbarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txt_idbarangActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
+try {
+           
+       String sql =
+        "INSERT into pembelian (id_pembelian,id_pembayaran,id_barang,id_supplier,tgl_pembelian) values"
+               +"('"+txt_idpembelian.getText()
+               +"','"+txt_idpembayaran.getText()
+               +"','"+txt_idbarang.getText()
+               +"','"+txt_idsupplier.getText()           
+               +"','"+txt_tglpembelian.getText()+"')";
+               
+       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+       pst.execute();
+       JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
+       reset_pembelian();
+       } catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+           
+       }        
+    }//GEN-LAST:event_btn_tambahActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void txt_tglpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tglpembelianActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_txt_tglpembelianActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void txt_idsupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idsupplierActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_txt_idsupplierActionPerformed
 
     private void Btn_DashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_DashboardMouseEntered
         Btn_Dashboard.setBackground(new Color(239,239,239));
@@ -2085,6 +2125,37 @@ public void  panggil_table_barang(){
      new form_supplier().setVisible(true);
     }//GEN-LAST:event_jPanel21MouseClicked
 
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+      try{
+        String sql = "update pembelian set id_barang='"+txt_idbarang.getText()
+                +"',id_pembayaran='"+txt_idpembayaran.getText()
+                +"',id_supplier='"+txt_idsupplier.getText()
+                +"',tgl_pembelian='"+txt_tglpembelian.getText()
+                +"' where id_pembelian='"+txt_idpembelian.getText()+"'";
+    
+     
+            pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data telah diupdate");
+           reset_pembelian();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }table_beli();
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+         String sql = "delete from pembelian where id_pembelian = '"+txt_idpembelian.getText()+"'";
+        try {
+            pst =conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+            reset_pembelian();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "data gagal dihapus");
+        }
+        table_beli();
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2146,6 +2217,9 @@ public void  panggil_table_barang(){
     private javax.swing.JPanel Pembelian;
     private javax.swing.JPanel Penjualan;
     private javax.swing.JComboBox<String> box_jenis_kelamin;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_tambah;
+    private javax.swing.JButton btn_update;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton clear_barang;
     private javax.swing.JButton delete_barang;
@@ -2159,14 +2233,10 @@ public void  panggil_table_barang(){
     private javax.swing.JTextField id_karyawan;
     private javax.swing.JTextField id_supplier;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2249,21 +2319,21 @@ public void  panggil_table_barang(){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPasswordField password;
     private javax.swing.JTable penjualan;
     private javax.swing.JButton simpan_barang;
     private javax.swing.JTextField stock;
     private javax.swing.JTable table_barang;
     private javax.swing.JTable table_karyawan;
+    private javax.swing.JTable table_pembelian;
+    private javax.swing.JTextField txt_idbarang;
+    private javax.swing.JTextField txt_idpembayaran;
+    private javax.swing.JTextField txt_idpembelian;
+    private javax.swing.JTextField txt_idsupplier;
     private javax.swing.JTextField txt_jabatan;
     private javax.swing.JTextField txt_nama;
+    private javax.swing.JTextField txt_tglpembelian;
     private javax.swing.JButton update_barang;
     // End of variables declaration//GEN-END:variables
 
