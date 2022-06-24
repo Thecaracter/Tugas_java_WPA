@@ -239,7 +239,7 @@ public void reset(){
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       try{    
        String sql =
-        "INSERT into supplier (id_supplier,namasupplier,alamat,NoTelp) values"
+        "INSERT into supplier (id_supplier,nama_supplier,alamat,no_telp) values"
                +"('"+txt_idsupplier.getText()
                +"','"+ txt_nama.getText()
                +"','"+txt_alamat.getText()
@@ -258,9 +258,9 @@ public void reset(){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        try{
-        String sql = "update supplier set namasupplier='"+txt_nama.getText()
+        String sql = "update supplier set nama_supplier='"+txt_nama.getText()
                 +"',alamat='"+txt_alamat.getText()
-                +"',NoTelp='"+txt_no_telp.getText()
+                +"',no_telp='"+txt_no_telp.getText()
                 +"' where id_supplier='"+txt_idsupplier.getText()+"'";
     
      
@@ -275,7 +275,7 @@ public void reset(){
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-        String sql = "delete from supplier where Id_supplier  = '"+txt_idsupplier.getText()+"'";
+        String sql = "delete from supplier where id_supplier  = '"+txt_idsupplier.getText()+"'";
         try {
             java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
