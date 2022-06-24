@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class layanan_jual extends javax.swing.JFrame {
+public class layanan_pembelian extends javax.swing.JFrame {
     Connection conn;
     ResultSet rs = null;
     PreparedStatement pst = null;
@@ -65,23 +65,23 @@ new Timer(1000, taskPerformer).start();
      
      
 }
-    public void kliktable_layananpenjualan(){
+    public void kliktable_layananpembelian(){
         int baris =tampil_barang.getSelectedRow();
         txt_id_barang.setText((String)tampil_barang.getValueAt(baris, 0));
         txt_namabarang.setText((String)tampil_barang.getValueAt(baris, 1));
         txt_jenisbarang.setText((String)tampil_barang.getValueAt(baris, 2));
-        txt_HargaBarang.setText((String) tampil_barang.getValueAt (baris,3));
+        txt_HargaBarang.setText((String)tampil_barang.getValueAt (baris,3));
         
        
     }
-    public void auto_idpenjualan() throws SQLException {
+    public void auto_idpembelian() throws SQLException {
         try{
-            String sql = "SELECT * FROM Penjualan ORDER BY id_penjualan DESC";
+            String sql = "SELECT * FROM Pembelian ORDER BY id_pembelian DESC";
             java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet rs =  stm.executeQuery(sql);
             if (rs.next()) {
-                String id_transaksi = rs.getString("id_penjualan").substring(2);
+                String id_transaksi = rs.getString("id_pembelian").substring(2);
                 String ID = "" + (Integer.parseInt(id_transaksi) + 1);
                 String Nol = "";
 
@@ -94,9 +94,9 @@ new Timer(1000, taskPerformer).start();
                 } else if (ID.length() == 4) {
                     Nol = "";
                 }
-                txt_id_penjualan.setText("RI" + Nol + ID);
+                txt_id_pembelian.setText("IZ" + Nol + ID);
             } else {
-                txt_id_penjualan.setText("RI0001");
+                txt_id_pembelian.setText("IZ0001");
             
                     
         } 
@@ -137,7 +137,6 @@ new Timer(1000, taskPerformer).start();
         tabel.addColumn("Kuantitas");
         tabel.addColumn("Jenis Barang");
         tabel.addColumn("Total");
-        
         tblKeranjang.setModel(tabel);
                 
     }
@@ -155,10 +154,10 @@ new Timer(1000, taskPerformer).start();
     void aturTombol (){
 
     txt_id_barang.setEnabled(false);
-    txt_id_penjualan.setEnabled(false);
+    txt_id_pembelian.setEnabled(false);
 
 }
-     public void balikdata_layananjual(){
+     public void balikdata_layananpembelian(){
         try{
            String sql = "SELECT id_karyawan FROM karyawan where id_karyawan =" + id;
            java.sql.Connection conn=(Connection)Koneksi.getKoneksi();
@@ -177,7 +176,7 @@ new Timer(1000, taskPerformer).start();
      }
     
     
-    public layanan_jual() throws SQLException {
+    public layanan_pembelian() throws SQLException {
         initComponents();
         tampilTable();
         tampil();
@@ -185,24 +184,23 @@ new Timer(1000, taskPerformer).start();
         aturTombol();
         id_karyawan();
         tanggal();
-        auto_idpenjualan();
+        auto_idpembelian();
         
     }
     
-    public layanan_jual(String id) throws SQLException {
+    public layanan_pembelian(String id) throws SQLException {
         initComponents();
         this.conn = Koneksi.getKoneksi();
         this.id = id;
         id_karyawan();
         tanggal();
-        auto_idpenjualan();
+        auto_idpembelian();
         tampil();
         tampilTable();
          aturTombol();
          setJam();
         
     }
-
     public void id_karyawan(){
             try {
                      String sql = "select id_karyawan from karyawan where id_karyawan = " + id;
@@ -256,7 +254,7 @@ new Timer(1000, taskPerformer).start();
         txt_namabarang = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
-        txt_id_penjualan = new javax.swing.JTextField();
+        txt_id_pembelian = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         tanggal_beli = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -286,21 +284,21 @@ new Timer(1000, taskPerformer).start();
         });
         jScrollPane2.setViewportView(tblKeranjang);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 550, 500));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 550, 550));
 
         jPanel1.setBackground(new java.awt.Color(15, 247, 147));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel1.setText("Id penjualan");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+        jLabel1.setText("Id pembelian");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
         txt_id_barang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_id_barangActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_id_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 140, -1));
+        jPanel1.add(txt_id_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 140, -1));
 
         jLabel9.setText("Jam :");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 30, -1));
@@ -322,7 +320,7 @@ new Timer(1000, taskPerformer).start();
                 btnEditItemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 110, -1));
+        jPanel1.add(btnEditItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 110, -1));
 
         btnHapusItem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnHapusItem.setText("Hapus Item");
@@ -332,7 +330,7 @@ new Timer(1000, taskPerformer).start();
                 btnHapusItemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapusItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 110, -1));
+        jPanel1.add(btnHapusItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 590, 110, -1));
 
         btnBatal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBatal.setText("Batalkan Transaksi");
@@ -341,7 +339,7 @@ new Timer(1000, taskPerformer).start();
                 btnBatalActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 540, 150, -1));
+        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 590, 150, -1));
 
         btnCetak.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCetak.setText("Cetak Struk");
@@ -350,7 +348,7 @@ new Timer(1000, taskPerformer).start();
                 btnCetakActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
+        jPanel1.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, -1, -1));
 
         txtJmlKembalian.setEditable(false);
         txtJmlKembalian.setBackground(new java.awt.Color(204, 204, 204));
@@ -361,11 +359,11 @@ new Timer(1000, taskPerformer).start();
                 txtJmlKembalianActionPerformed(evt);
             }
         });
-        jPanel1.add(txtJmlKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 140, -1));
+        jPanel1.add(txtJmlKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, 140, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Kembalian");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, -1, -1));
 
         btnHitungJmlKembalian.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnHitungJmlKembalian.setText("Jumlah Kembalian");
@@ -374,7 +372,7 @@ new Timer(1000, taskPerformer).start();
                 btnHitungJmlKembalianActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHitungJmlKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 190, -1));
+        jPanel1.add(btnHitungJmlKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, 190, -1));
 
         txtJmlBayar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtJmlBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -387,15 +385,15 @@ new Timer(1000, taskPerformer).start();
                 txtJmlBayarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtJmlBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 140, -1));
+        jPanel1.add(txtJmlBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 140, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Tunai");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Total");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 30, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 30, -1));
 
         txtJmlHarga.setEditable(false);
         txtJmlHarga.setBackground(new java.awt.Color(204, 204, 204));
@@ -406,7 +404,7 @@ new Timer(1000, taskPerformer).start();
                 txtJmlHargaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtJmlHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 140, -1));
+        jPanel1.add(txtJmlHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 140, -1));
 
         btnTambah.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnTambah.setText("Tambah Ke Keranjang");
@@ -415,7 +413,7 @@ new Timer(1000, taskPerformer).start();
                 btnTambahActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 190, -1));
+        jPanel1.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 190, -1));
 
         txt_jumlahbeli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_jumlahbeli.setText("1");
@@ -429,21 +427,21 @@ new Timer(1000, taskPerformer).start();
                 txt_jumlahbeliKeyReleased(evt);
             }
         });
-        jPanel1.add(txt_jumlahbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 140, -1));
+        jPanel1.add(txt_jumlahbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Kuantitas");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Harga Barang");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
 
         txt_HargaBarang.setEditable(false);
         txt_HargaBarang.setBackground(new java.awt.Color(204, 204, 204));
         txt_HargaBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_HargaBarang.setText("0");
-        jPanel1.add(txt_HargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 140, -1));
+        jPanel1.add(txt_HargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 140, -1));
 
         txt_jenisbarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_jenisbarang.addActionListener(new java.awt.event.ActionListener() {
@@ -456,15 +454,15 @@ new Timer(1000, taskPerformer).start();
                 txt_jenisbarangKeyReleased(evt);
             }
         });
-        jPanel1.add(txt_jenisbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 140, -1));
+        jPanel1.add(txt_jenisbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 140, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Jenis Barang");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nama Barang");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         txt_namabarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_namabarang.addActionListener(new java.awt.event.ActionListener() {
@@ -477,7 +475,7 @@ new Timer(1000, taskPerformer).start();
                 txt_namabarangKeyReleased(evt);
             }
         });
-        jPanel1.add(txt_namabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 140, -1));
+        jPanel1.add(txt_namabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 140, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Clear");
@@ -486,7 +484,7 @@ new Timer(1000, taskPerformer).start();
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
 
         btnKeluar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnKeluar.setText("Keluar");
@@ -495,18 +493,18 @@ new Timer(1000, taskPerformer).start();
                 btnKeluarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 100, -1));
+        jPanel1.add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 100, -1));
 
-        txt_id_penjualan.addActionListener(new java.awt.event.ActionListener() {
+        txt_id_pembelian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_id_penjualanActionPerformed(evt);
+                txt_id_pembelianActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_id_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 140, -1));
+        jPanel1.add(txt_id_pembelian, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel10.setText("Id Barang");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
         tanggal_beli.setText("00.00.00");
         jPanel1.add(tanggal_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
@@ -547,7 +545,7 @@ new Timer(1000, taskPerformer).start();
         });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 150, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 600));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 640));
 
         pack();
         setLocationRelativeTo(null);
@@ -630,7 +628,7 @@ new Timer(1000, taskPerformer).start();
        int tampung = Integer.parseInt(txtJmlKembalian.getText());
         
        if(tampung < 0){
-           JOptionPane.showMessageDialog(this,"duitnya kurang");
+           JOptionPane.showMessageDialog(this,"duitnya kurang ngab");
        }else if(txtJmlBayar.getText().equals("")){
              JOptionPane.showMessageDialog(this, "Duitnya dulu ngab");
         }else{
@@ -639,8 +637,8 @@ new Timer(1000, taskPerformer).start();
       
         
        String sql = 
-        "INSERT into penjualan (id_penjualan,tanggal_transaksi,total,tunai,kembali,id_karyawan) values"
-               +"('"+txt_id_penjualan.getText()
+        "INSERT into pembelian (id_pembelian,tgl_pembelian,total,tunai,kembali,id_karyawan) values"
+               +"('"+txt_id_pembelian.getText()
                +"','"+tanggal_beli.getText()
                +"','"+txtJmlHarga.getText()
                +"','"+txtJmlBayar.getText()
@@ -651,6 +649,7 @@ new Timer(1000, taskPerformer).start();
        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
        pst.execute();
        reset();
+       JOptionPane.showMessageDialog(this,"ok ngab");
        } catch (Exception ex){
            JOptionPane.showMessageDialog(this, ex.getMessage());
            
@@ -660,8 +659,8 @@ new Timer(1000, taskPerformer).start();
             int baris = tblKeranjang.getRowCount();
 
             for (int i = 0; i < baris; i++) {
-                String sql = "INSERT INTO detailpenjualan(id_penjualan, id_barang, jumlah_penjualan) VALUES('"
-                        + txt_id_penjualan.getText() + "','" + tblKeranjang.getValueAt(i, 0) + "','"
+                String sql = "INSERT INTO detailpembelian(id_pembelian, id_barang, qty) VALUES('"
+                        + txt_id_pembelian.getText() + "','" + tblKeranjang.getValueAt(i, 0) + "','"
                         + tblKeranjang.getValueAt(i, 3) + "')";
                 java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                 pst.executeUpdate();
@@ -685,7 +684,7 @@ new Timer(1000, taskPerformer).start();
      } 
            
         
-        
+        balikdata_layananpembelian();
         
    
     
@@ -694,7 +693,7 @@ new Timer(1000, taskPerformer).start();
     }//GEN-LAST:event_btnHitungJmlKembalianActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
-     balikdata_layananjual();
+     balikdata_layananpembelian();
     }//GEN-LAST:event_btnKeluarActionPerformed
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
@@ -739,7 +738,7 @@ new Timer(1000, taskPerformer).start();
                 System.out.println(e);
             } 
         }
-        balikdata_layananjual();
+        balikdata_layananpembelian();
         
     }//GEN-LAST:event_btnCetakActionPerformed
 
@@ -850,16 +849,16 @@ new Timer(1000, taskPerformer).start();
     }//GEN-LAST:event_txt_jumlahbeliActionPerformed
 
     private void tampil_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tampil_barangMouseClicked
-        kliktable_layananpenjualan();
+        kliktable_layananpembelian();
     }//GEN-LAST:event_tampil_barangMouseClicked
 
     private void txt_id_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_barangActionPerformed
      
     }//GEN-LAST:event_txt_id_barangActionPerformed
 
-    private void txt_id_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_penjualanActionPerformed
+    private void txt_id_pembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_pembelianActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_id_penjualanActionPerformed
+    }//GEN-LAST:event_txt_id_pembelianActionPerformed
 
     private void txtJmlBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJmlBayarActionPerformed
         // TODO add your handling code here:
@@ -915,14 +914,18 @@ new Timer(1000, taskPerformer).start();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(layanan_jual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(layanan_pembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(layanan_jual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(layanan_pembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(layanan_jual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(layanan_pembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(layanan_jual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(layanan_pembelian.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -932,9 +935,9 @@ new Timer(1000, taskPerformer).start();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new layanan_jual().setVisible(true);
+                    new layanan_pembelian().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(layanan_jual.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(layanan_pembelian.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -974,7 +977,7 @@ new Timer(1000, taskPerformer).start();
     private javax.swing.JTextField txtJmlKembalian;
     private javax.swing.JTextField txt_HargaBarang;
     private javax.swing.JTextField txt_id_barang;
-    private javax.swing.JTextField txt_id_penjualan;
+    private javax.swing.JTextField txt_id_pembelian;
     private javax.swing.JTextField txt_jenisbarang;
     private javax.swing.JTextField txt_jumlahbeli;
     private javax.swing.JTextField txt_namabarang;

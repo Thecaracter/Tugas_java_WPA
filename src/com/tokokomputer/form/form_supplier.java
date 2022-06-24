@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -16,7 +18,23 @@ import javax.swing.table.DefaultTableModel;
  * @author acer
  */
 public class form_supplier extends javax.swing.JFrame {
+Connection conn;
+ResultSet rs = null;
+PreparedStatement pst = null;
 
+public void kliktable(){
+        int baris =table_supplier.getSelectedRow();
+        txt_idsupplier.setText((String)table_supplier.getValueAt(baris, 0));
+        txt_nama.setText((String) table_supplier.getValueAt (baris,1));
+        txt_alamat.setText((String) table_supplier.getValueAt (baris,2));
+        txt_no_telp.setText((String) table_supplier.getValueAt (baris,3));
+    }
+public void reset(){
+   txt_idsupplier.setText("");
+   txt_nama.setText("");
+   txt_alamat.setText("");
+   txt_no_telp.setText("");
+}
     
     
     public void tampil(){
@@ -75,6 +93,18 @@ public class form_supplier extends javax.swing.JFrame {
         table_supplier = new javax.swing.JTable();
         tbl_keluar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_no_telp = new javax.swing.JTextField();
+        txt_idsupplier = new javax.swing.JTextField();
+        txt_nama = new javax.swing.JTextField();
+        txt_alamat = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,9 +122,14 @@ public class form_supplier extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_supplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_supplierMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_supplier);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 690, 420));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 251, 690, 180));
 
         tbl_keluar.setBackground(new java.awt.Color(173, 255, 47));
         tbl_keluar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -116,6 +151,58 @@ public class form_supplier extends javax.swing.JFrame {
         tbl_keluar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.add(tbl_keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 40, 30));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setText("No telp");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("ID Supplier");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("Nama Supplier");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("Alamat");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, -1));
+        jPanel1.add(txt_no_telp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 240, -1));
+        jPanel1.add(txt_idsupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 240, -1));
+        jPanel1.add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 240, -1));
+        jPanel1.add(txt_alamat, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 240, -1));
+
+        jButton1.setText("Simpan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 70, -1));
+
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 70, -1));
+
+        Delete.setText("Delete");
+        Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 70, -1));
+
+        jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,6 +235,65 @@ public class form_supplier extends javax.swing.JFrame {
     private void tbl_keluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_keluarMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_tbl_keluarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      try{    
+       String sql =
+        "INSERT into supplier (id_supplier,namasupplier,alamat,NoTelp) values"
+               +"('"+txt_idsupplier.getText()
+               +"','"+ txt_nama.getText()
+               +"','"+txt_alamat.getText()
+               +"','"+txt_no_telp.getText()+"')";
+               
+       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+       pst.execute();
+       JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
+       reset();
+       } catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+           
+       }tampil();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       try{
+        String sql = "update supplier set namasupplier='"+txt_nama.getText()
+                +"',alamat='"+txt_alamat.getText()
+                +"',NoTelp='"+txt_no_telp.getText()
+                +"' where id_supplier='"+txt_idsupplier.getText()+"'";
+    
+     
+       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data telah diupdate");
+            reset();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }tampil();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+        String sql = "delete from supplier where Id_supplier  = '"+txt_idsupplier.getText()+"'";
+        try {
+            java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "data gagal");
+        }
+        tampil();
+    }//GEN-LAST:event_DeleteActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       reset();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void table_supplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_supplierMouseClicked
+        kliktable();
+    }//GEN-LAST:event_table_supplierMouseClicked
 
     /**
      * @param args the command line arguments
@@ -186,10 +332,22 @@ public class form_supplier extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Delete;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_supplier;
     private javax.swing.JPanel tbl_keluar;
+    private javax.swing.JTextField txt_alamat;
+    private javax.swing.JTextField txt_idsupplier;
+    private javax.swing.JTextField txt_nama;
+    private javax.swing.JTextField txt_no_telp;
     // End of variables declaration//GEN-END:variables
 }

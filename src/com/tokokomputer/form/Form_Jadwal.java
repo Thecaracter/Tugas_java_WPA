@@ -18,7 +18,45 @@ import javax.swing.table.DefaultTableModel;
 public class Form_Jadwal extends javax.swing.JFrame {
 
     
-    
+public void reset(){
+   txt_id_karyawan.setText("");
+   txt_idjadwal.setText("");
+   terjadwal.setSelectedItem("");
+}
+public void kliktable(){
+        int baris =table_jadwal.getSelectedRow();
+        txt_idjadwal.setText((String)table_jadwal.getValueAt(baris, 0));
+        txt_id_karyawan.setText((String) table_jadwal.getValueAt (baris,1));
+        terjadwal.setSelectedItem((String) table_jadwal.getValueAt (baris,4));
+    }
+        public void kliktable_karyawan(){
+            int baris =table_tampil_karyawan.getSelectedRow();
+        txt_id_karyawan.setText((String) table_jadwal.getValueAt (baris,0));
+        }
+    public void tampil_table_karyawan(){
+        DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("ID Karyawan");
+        tbl.addColumn("Nama Karyawan");
+        tbl.addColumn("Jabatan");
+        tbl.addColumn("Jenis_kelamin");
+        try {
+            String sql = "SELECT id_karyawan,Nama_karyawan,jabatan,jenis_kelamin From Karyawan";
+            java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                tbl.addRow(new Object[]{
+                    res.getString(1),
+                    res.getString(2),
+                    res.getString(3),
+                    res.getString(4),
+                });
+            }
+            table_tampil_karyawan.setModel(tbl);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
     public void tampil(){
         DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("ID Jadwal");
@@ -60,6 +98,7 @@ public class Form_Jadwal extends javax.swing.JFrame {
         int y = layar.height / 2 - this.getSize().height / 2;
 
         this.setLocation(x, y);
+        tampil_table_karyawan();
     }
 
     /**
@@ -76,12 +115,25 @@ public class Form_Jadwal extends javax.swing.JFrame {
         table_jadwal = new javax.swing.JTable();
         tbl_keluar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txt_idjadwal = new javax.swing.JTextField();
+        txt_id_karyawan = new javax.swing.JTextField();
+        terjadwal = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table_tampil_karyawan = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(15, 247, 147));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        table_jadwal.setAutoCreateRowSorter(true);
         table_jadwal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -93,9 +145,15 @@ public class Form_Jadwal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_jadwal.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        table_jadwal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_jadwalMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_jadwal);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 690, 420));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 390, 420));
 
         tbl_keluar.setBackground(new java.awt.Color(173, 255, 47));
         tbl_keluar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -118,20 +176,105 @@ public class Form_Jadwal extends javax.swing.JFrame {
 
         jPanel1.add(tbl_keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 40, 30));
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("Id Jadwal");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("Terjadwal");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("Id Karyawan");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, -1, -1));
+
+        txt_idjadwal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_idjadwalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_idjadwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 230, -1));
+
+        txt_id_karyawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_id_karyawanActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 230, -1));
+
+        terjadwal.setFont(new java.awt.Font("Trebuchet MS", 0, 11)); // NOI18N
+        terjadwal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Senin-Pagi", "Senin-Malam", "Selasa-Pagi", "Selasa-Malam", "Rabu-Pagi", "Rabu-Malam", "Kamis-Pagi", "Kamis-Malam", "Jumat-Pagi", "Jumat-Malam", "Sabtu-Pagi", "Sabtu-Malam'" }));
+        jPanel1.add(terjadwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 230, 40));
+
+        jButton1.setText("Simpan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
+
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
+
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 70, -1));
+
+        jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, 70, -1));
+
+        table_tampil_karyawan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        table_tampil_karyawan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_tampil_karyawanMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                table_tampil_karyawanMouseEntered(evt);
+            }
+        });
+        jScrollPane2.setViewportView(table_tampil_karyawan);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 440, 190));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -149,6 +292,79 @@ public class Form_Jadwal extends javax.swing.JFrame {
     private void tbl_keluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_keluarMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_tbl_keluarMouseClicked
+
+    private void txt_idjadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idjadwalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idjadwalActionPerformed
+
+    private void txt_id_karyawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_karyawanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_id_karyawanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          try{    
+       String sql =
+        "INSERT into jadwal (id_jadwal,id_karyawan,terjadwal) values"
+               +"('"+ txt_idjadwal.getText()
+               +"','"+ txt_id_karyawan.getText()
+               +"','"+terjadwal.getSelectedItem()+"')";
+               
+       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+       pst.execute();
+       JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
+       reset();
+       } catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+           
+       }tampil();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        reset();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       try{
+        String sql = "update jadwal set id_karyawan='"+txt_id_karyawan.getText()
+                +"',terjadwal='"+terjadwal.getSelectedItem()
+                +"' where id_jadwal='"+txt_idjadwal.getText()+"'";
+    
+     
+       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+        pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data telah diupdate");
+            reset();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }tampil();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      String sql = "delete from jadwal where Id_jadwal  = '"+txt_idjadwal.getText()+"'";
+        try {
+            java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data berhasil dihapus");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "data gagal");
+        }
+        tampil();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void table_jadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_jadwalMouseClicked
+      kliktable();
+    }//GEN-LAST:event_table_jadwalMouseClicked
+
+    private void table_tampil_karyawanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tampil_karyawanMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table_tampil_karyawanMouseEntered
+
+    private void table_tampil_karyawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tampil_karyawanMouseClicked
+       kliktable_karyawan();
+    }//GEN-LAST:event_table_tampil_karyawanMouseClicked
 
     /**
      * @param args the command line arguments
@@ -186,10 +402,22 @@ public class Form_Jadwal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable table_jadwal;
+    private javax.swing.JTable table_tampil_karyawan;
     private javax.swing.JPanel tbl_keluar;
+    private javax.swing.JComboBox<String> terjadwal;
+    private javax.swing.JTextField txt_id_karyawan;
+    private javax.swing.JTextField txt_idjadwal;
     // End of variables declaration//GEN-END:variables
 }

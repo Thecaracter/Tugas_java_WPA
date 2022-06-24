@@ -42,12 +42,9 @@ public void reset_barang(){
     harga_produk.setText("");
     id_supplier.setText("");
 }
-public void reset_pembelian(){
-    txt_idpembelian.setText("");
-    txt_idpembayaran.setText("");
-    txt_idbarang.setText("");
-    txt_idsupplier.setText("");
-    txt_tglpembelian.setText("");
+public void klik_table_pembelian(){
+     int baris = table_pembelian.getSelectedRow();
+        cari_pembelian.setText((String)penjualan.getValueAt(baris, 0));
 }
  public void klik_table_penjualan(){
         int baris = penjualan.getSelectedRow();
@@ -116,26 +113,7 @@ public void table_pegawai() {
         JOptionPane.showMessageDialog(null, e.getMessage());
         }
         }
-public void table_beli() {
-    DefaultTableModel tbl = new DefaultTableModel();
-        tbl.addColumn("Id pembelian");
-        tbl.addColumn("Id pembayaran");
-        tbl.addColumn("Id Barang");
-        tbl.addColumn("Id Supptlier");
-        tbl.addColumn("Tanggal pembelian");
-        
-        try {
-            String sql = "Select * from pembelian";
-            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
-            java.sql.Statement stm = conn.createStatement();
-            java.sql.ResultSet res =  stm.executeQuery(sql);
-            while (res.next()){
-                tbl.addRow(new Object[] {res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5)});
-            }table_pembelian.setModel(tbl);
-        } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        }
+
 public void  panggil_table_barang(){
     DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("Id Barang");
@@ -162,6 +140,53 @@ public void  panggil_table_barang(){
         JOptionPane.showMessageDialog(null, e.getMessage());
         }
 }
+public void tampil_table_pembelian(){
+     DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id Penjualan");
+        tbl.addColumn("Tanggal Transaksi");
+        tbl.addColumn("Jenis Total");
+        tbl.addColumn("Tunai");
+        tbl.addColumn("Kembali");
+        tbl.addColumn("ID Barang");
+        tbl.addColumn("Kuantitas");
+        try {
+            String sql = "SELECT p.id_pembelian, p.tgl_pembelian,p.total,p.tunai,p.kembali,d.id_barang,d.qty,p.id_karyawan FROM pembelian p INNER JOIN detailpembelian d ON p.id_pembelian=d.id_pembelian;";
+            java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res = stm.executeQuery(sql);
+            while (res.next()) {
+                tbl.addRow(new Object[]{
+                    res.getString(1),
+                    res.getString(2),
+                    res.getString(3),
+                    res.getString(4),
+                    res.getString(5),
+                    res.getString(6),
+                    res.getString(7),
+                });
+            }
+            table_pembelian.setModel(tbl);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+}
+public void lempardata_layananpembelian(){
+        try{
+           String sql = "SELECT id_karyawan FROM karyawan where id_karyawan =" + id;
+           java.sql.Connection conn=(Connection)Koneksi.getKoneksi();
+           java.sql.PreparedStatement pst = conn.prepareCall(sql);
+           java.sql.ResultSet rs=pst.executeQuery();
+          
+           if(rs.next()){
+           new layanan_pembelian(rs.getString(1)).setVisible(true);
+           this.setVisible(false);
+               }
+               
+     
+       }catch (Exception e){
+           JOptionPane.showMessageDialog(this, e.getMessage());
+       }
+     }
         
     
 
@@ -183,7 +208,7 @@ public void  panggil_table_barang(){
         table_penjualan();
         panggil_table_barang();
         table_penjualan();
-        table_beli();
+        tampil_table_pembelian();
         
         Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
         int x = layar.width / 2  - this.getSize().width / 2;
@@ -205,7 +230,7 @@ public void  panggil_table_barang(){
         table_penjualan();
         panggil_table_barang();
         table_penjualan();
-        table_beli();
+        tampil_table_pembelian();
         
         Dimension layar = Toolkit.getDefaultToolkit().getScreenSize();
         int x = layar.width / 2  - this.getSize().width / 2;
@@ -306,6 +331,56 @@ public void  panggil_table_barang(){
         jPanel21 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         Main_Form = new javax.swing.JPanel();
+        Dashboard = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel34 = new javax.swing.JLabel();
+        Pembelian = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        table_pembelian = new javax.swing.JTable();
+        jLabel47 = new javax.swing.JLabel();
+        cari_pembelian = new javax.swing.JTextField();
+        hapus_form_pembelian = new javax.swing.JLabel();
+        Pegawai = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_karyawan = new javax.swing.JTable();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        id_karyawan = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        txt_nama = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        txt_jabatan = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        box_jenis_kelamin = new javax.swing.JComboBox<>();
+        jLabel44 = new javax.swing.JLabel();
+        password = new javax.swing.JPasswordField();
+        jButton13 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         Penjualan = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -322,35 +397,6 @@ public void  panggil_table_barang(){
         jLabel54 = new javax.swing.JLabel();
         Cari_penjualan = new javax.swing.JTextField();
         hapus_form_penjualan = new javax.swing.JLabel();
-        Pembelian = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel47 = new javax.swing.JLabel();
-        txt_idpembayaran = new javax.swing.JTextField();
-        txt_idpembelian = new javax.swing.JTextField();
-        jLabel48 = new javax.swing.JLabel();
-        txt_idbarang = new javax.swing.JTextField();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        btn_tambah = new javax.swing.JButton();
-        btn_update = new javax.swing.JButton();
-        btn_delete = new javax.swing.JButton();
-        txt_tglpembelian = new javax.swing.JTextField();
-        txt_idsupplier = new javax.swing.JTextField();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        table_pembelian = new javax.swing.JTable();
         Barang = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -376,37 +422,6 @@ public void  panggil_table_barang(){
         clear_barang = new javax.swing.JButton();
         jLabel57 = new javax.swing.JLabel();
         stock = new javax.swing.JTextField();
-        Pegawai = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table_karyawan = new javax.swing.JTable();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel35 = new javax.swing.JLabel();
-        id_karyawan = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
-        txt_nama = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        txt_jabatan = new javax.swing.JTextField();
-        jLabel38 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        box_jenis_kelamin = new javax.swing.JComboBox<>();
-        jLabel44 = new javax.swing.JLabel();
-        password = new javax.swing.JPasswordField();
-        jButton13 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        Dashboard = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -570,7 +585,7 @@ public void  panggil_table_barang(){
                 jLabel21MousePressed(evt);
             }
         });
-        Btn_Pembelian.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 72, -1));
+        Btn_Pembelian.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 72, -1));
 
         jLabel22.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
         jLabel22.setText("Pembelian");
@@ -784,6 +799,432 @@ public void  panggil_table_barang(){
         Main_Form.setBackground(new java.awt.Color(255, 255, 255));
         Main_Form.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Dashboard.setBackground(new java.awt.Color(255, 255, 255));
+        Dashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/home.png"))); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel15.setText("Dashboard");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15))
+                    .addComponent(jLabel6))
+                .addGap(0, 52, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(14, 14, 14)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
+        );
+
+        Dashboard.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/formjpg/enterkomputer-logo.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(149, Short.MAX_VALUE)
+                .addComponent(jLabel34)
+                .addGap(35, 35, 35))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(225, 225, 225)
+                .addComponent(jLabel34)
+                .addContainerGap(335, Short.MAX_VALUE))
+        );
+
+        Dashboard.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 620));
+
+        Main_Form.add(Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 660));
+
+        Pembelian.setBackground(new java.awt.Color(255, 255, 255));
+        Pembelian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel7.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
+
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/Pembelian.png"))); // NOI18N
+
+        jLabel31.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel31.setText("Pembelian");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel31)
+                .addGap(0, 291, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addGap(3, 3, 3))
+                    .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+
+        Pembelian.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 110));
+
+        jPanel17.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
+
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/penjulan.png"))); // NOI18N
+
+        jLabel46.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel46.setText("Penjualan");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel45)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel46))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)))
+                .addGap(0, 42, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel46)
+                        .addGap(18, 18, 18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        Pembelian.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
+
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel19.setBackground(new java.awt.Color(255, 204, 153));
+
+        jLabel49.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel49.setText("ID Karyawan =");
+
+        jLabel50.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel50.setText("0");
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel50)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel49)
+                .addComponent(jLabel50))
+        );
+
+        table_pembelian.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        table_pembelian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_pembelianMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(table_pembelian);
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/pembelian 2.png"))); // NOI18N
+        jLabel47.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel47MouseClicked(evt);
+            }
+        });
+
+        cari_pembelian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cari_pembelianActionPerformed(evt);
+            }
+        });
+        cari_pembelian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cari_pembelianKeyReleased(evt);
+            }
+        });
+
+        hapus_form_pembelian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/tempat sampah.png"))); // NOI18N
+        hapus_form_pembelian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hapus_form_pembelianMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jLabel47)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                                .addComponent(hapus_form_pembelian)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cari_pembelian, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cari_pembelian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel47))
+                    .addComponent(hapus_form_pembelian, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jPanel18.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 530));
+
+        Pembelian.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 520));
+
+        Main_Form.add(Pembelian, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
+
+        Pegawai.setBackground(new java.awt.Color(255, 255, 255));
+        Pegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/people.png"))); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel20.setText("Pegawai");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20))
+                    .addComponent(jLabel7))
+                .addGap(0, 52, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(19, 19, 19)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        Pegawai.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        table_karyawan.setBackground(new java.awt.Color(255, 204, 51));
+        table_karyawan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID Karyawan", "Nama", "Jabatan", "Jenis Kelamin"
+            }
+        ));
+        table_karyawan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_karyawanMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table_karyawan);
+
+        jPanel10.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 270, 430));
+
+        jPanel12.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel35.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel35.setText("ID Karyawan");
+        jPanel12.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        id_karyawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_karyawanActionPerformed(evt);
+            }
+        });
+        jPanel12.add(id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 11, 173, -1));
+
+        jLabel36.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel36.setText("Nama");
+        jPanel12.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 44, -1, -1));
+
+        txt_nama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_namaActionPerformed(evt);
+            }
+        });
+        jPanel12.add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 42, 173, -1));
+
+        jLabel37.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel37.setText("Jabatan");
+        jPanel12.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 82, -1, -1));
+        jPanel12.add(txt_jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 80, 173, -1));
+
+        jLabel38.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel38.setText("Jenis kelamin");
+        jPanel12.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 151, -1, -1));
+
+        jButton1.setText("Simpan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 80, -1));
+
+        jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
+
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 70, -1));
+
+        box_jenis_kelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
+        jPanel12.add(box_jenis_kelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 149, 172, -1));
+
+        jLabel44.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jLabel44.setText("Password");
+        jPanel12.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        jPanel12.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 118, 173, -1));
+
+        jButton13.setText("Clear");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 60, -1));
+
+        jPanel10.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 280, 280));
+
+        jTextField1.setBackground(new java.awt.Color(255, 204, 153));
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        jPanel10.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 140, 20));
+
+        Pegawai.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 570, 600));
+
+        Main_Form.add(Pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 670));
+
         Penjualan.setBackground(new java.awt.Color(255, 255, 255));
         Penjualan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -895,6 +1336,11 @@ public void  panggil_table_barang(){
         jLabel54.setText("Jumlah Kembalian");
         jPanel13.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 323, -1, -1));
 
+        Cari_penjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cari_penjualanActionPerformed(evt);
+            }
+        });
         Cari_penjualan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 Cari_penjualanKeyReleased(evt);
@@ -915,276 +1361,6 @@ public void  panggil_table_barang(){
         Penjualan.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 550));
 
         Main_Form.add(Penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 660));
-
-        Pembelian.setBackground(new java.awt.Color(255, 255, 255));
-        Pembelian.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel7.setBackground(new java.awt.Color(0, 204, 153));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
-
-        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/Pembelian.png"))); // NOI18N
-
-        jLabel31.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel31.setText("Pembelian");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel31)
-                .addGap(0, 291, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel30)
-                        .addGap(3, 3, 3))
-                    .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-        );
-
-        Pembelian.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 110));
-
-        jPanel17.setBackground(new java.awt.Color(0, 204, 153));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
-
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/penjulan.png"))); // NOI18N
-
-        jLabel46.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel46.setText("Penjualan");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel45)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel46))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
-                .addGap(0, 40, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabel46)
-                        .addGap(18, 18, 18)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        Pembelian.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
-
-        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel19.setBackground(new java.awt.Color(255, 204, 153));
-
-        jLabel47.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel47.setText("ID Pembelian");
-
-        txt_idpembayaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idpembayaranActionPerformed(evt);
-            }
-        });
-
-        txt_idpembelian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idpembelianActionPerformed(evt);
-            }
-        });
-
-        jLabel48.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel48.setText("ID Barang");
-
-        txt_idbarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idbarangActionPerformed(evt);
-            }
-        });
-
-        jLabel49.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel49.setText("ID Karyawan =");
-
-        jLabel50.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel50.setText("0");
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel49)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel50)
-                .addContainerGap(126, Short.MAX_VALUE))
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel49)
-                .addComponent(jLabel50))
-        );
-
-        jLabel51.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel51.setText("ID Pembayaran");
-
-        btn_tambah.setText("Tambah");
-        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_tambahActionPerformed(evt);
-            }
-        });
-
-        btn_update.setText("Update");
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
-            }
-        });
-
-        btn_delete.setText("Delete");
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
-
-        txt_tglpembelian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_tglpembelianActionPerformed(evt);
-            }
-        });
-
-        txt_idsupplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idsupplierActionPerformed(evt);
-            }
-        });
-
-        jLabel52.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel52.setText("ID Supplier");
-
-        jLabel53.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel53.setText("Tanggal Pembelian");
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel48)
-                            .addComponent(jLabel47)
-                            .addComponent(jLabel51)
-                            .addComponent(jLabel52)
-                            .addComponent(jLabel53))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addComponent(txt_idpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 231, Short.MAX_VALUE))
-                            .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_idpembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel19Layout.createSequentialGroup()
-                                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel19Layout.createSequentialGroup()
-                                                .addComponent(btn_tambah)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btn_update))
-                                            .addComponent(txt_idbarang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(43, 43, 43)
-                                        .addComponent(btn_delete))
-                                    .addComponent(txt_tglpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_idsupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 124, Short.MAX_VALUE))))))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel47)
-                    .addComponent(txt_idpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_idpembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel51))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_idbarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel48))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_idsupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel52))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_tglpembelian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel53))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_tambah)
-                    .addComponent(btn_update)
-                    .addComponent(btn_delete))
-                .addGap(45, 45, 45))
-        );
-
-        jPanel18.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 390));
-
-        table_pembelian.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(table_pembelian);
-
-        jPanel18.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 570, 90));
-
-        Pembelian.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 520));
-
-        Main_Form.add(Pembelian, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
 
         Barang.setBackground(new java.awt.Color(255, 255, 255));
         Barang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1389,234 +1565,6 @@ public void  panggil_table_barang(){
 
         Main_Form.add(Barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 670));
 
-        Pegawai.setBackground(new java.awt.Color(255, 255, 255));
-        Pegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBackground(new java.awt.Color(0, 204, 153));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/people.png"))); // NOI18N
-
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel20.setText("Pegawai");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20))
-                    .addComponent(jLabel7))
-                .addGap(0, 52, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addGap(19, 19, 19)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        Pegawai.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
-
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        table_karyawan.setBackground(new java.awt.Color(255, 204, 51));
-        table_karyawan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID Karyawan", "Nama", "Jabatan", "Jenis Kelamin"
-            }
-        ));
-        table_karyawan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_karyawanMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table_karyawan);
-
-        jPanel10.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 270, 430));
-
-        jPanel12.setBackground(new java.awt.Color(255, 204, 153));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel35.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel35.setText("ID Karyawan");
-        jPanel12.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        id_karyawan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_karyawanActionPerformed(evt);
-            }
-        });
-        jPanel12.add(id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 11, 173, -1));
-
-        jLabel36.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel36.setText("Nama");
-        jPanel12.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 44, -1, -1));
-
-        txt_nama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_namaActionPerformed(evt);
-            }
-        });
-        jPanel12.add(txt_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 42, 173, -1));
-
-        jLabel37.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel37.setText("Jabatan");
-        jPanel12.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 82, -1, -1));
-        jPanel12.add(txt_jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 80, 173, -1));
-
-        jLabel38.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel38.setText("Jenis kelamin");
-        jPanel12.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 151, -1, -1));
-
-        jButton1.setText("Simpan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 80, -1));
-
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
-
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 70, -1));
-
-        box_jenis_kelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-laki", "Perempuan" }));
-        jPanel12.add(box_jenis_kelamin, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 149, 172, -1));
-
-        jLabel44.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jLabel44.setText("Password");
-        jPanel12.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        jPanel12.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 118, 173, -1));
-
-        jButton13.setText("Clear");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 60, -1));
-
-        jPanel10.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 280, 280));
-
-        jTextField1.setBackground(new java.awt.Color(255, 204, 153));
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
-        });
-        jPanel10.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 140, 20));
-
-        Pegawai.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 570, 600));
-
-        Main_Form.add(Pegawai, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 670));
-
-        Dashboard.setBackground(new java.awt.Color(255, 255, 255));
-        Dashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel4.setBackground(new java.awt.Color(0, 204, 153));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
-
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/home.png"))); // NOI18N
-
-        jLabel15.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel15.setText("Dashboard");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel15))
-                    .addComponent(jLabel6))
-                .addGap(0, 52, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(14, 14, 14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
-        );
-
-        Dashboard.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/formjpg/enterkomputer-logo.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
-                .addComponent(jLabel34)
-                .addGap(35, 35, 35))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addComponent(jLabel34)
-                .addContainerGap(335, Short.MAX_VALUE))
-        );
-
-        Dashboard.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 620));
-
-        Main_Form.add(Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 660));
-
         getContentPane().add(Main_Form, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 590, 670));
 
         pack();
@@ -1688,6 +1636,7 @@ public void  panggil_table_barang(){
           
            if(rs.next()){
            new layanan_jual(rs.getString(1)).setVisible(true);
+           this.setVisible(false);
                }
                
      
@@ -1845,48 +1794,6 @@ public void  panggil_table_barang(){
         }
     }//GEN-LAST:event_jPanel2MousePressed
 
-    private void txt_idpembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idpembayaranActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idpembayaranActionPerformed
-
-    private void txt_idpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idpembelianActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idpembelianActionPerformed
-
-    private void txt_idbarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idbarangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idbarangActionPerformed
-
-    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
-try {
-           
-       String sql =
-        "INSERT into pembelian (id_pembelian,id_pembayaran,id_barang,id_supplier,tgl_pembelian) values"
-               +"('"+txt_idpembelian.getText()
-               +"','"+txt_idpembayaran.getText()
-               +"','"+txt_idbarang.getText()
-               +"','"+txt_idsupplier.getText()           
-               +"','"+txt_tglpembelian.getText()+"')";
-               
-       java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
-       java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-       pst.execute();
-       JOptionPane.showMessageDialog(null,"Penyimpanan Data Berhasil");
-       reset_pembelian();
-       } catch (Exception e){
-           JOptionPane.showMessageDialog(this, e.getMessage());
-           
-       }        
-    }//GEN-LAST:event_btn_tambahActionPerformed
-
-    private void txt_tglpembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tglpembelianActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_tglpembelianActionPerformed
-
-    private void txt_idsupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idsupplierActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idsupplierActionPerformed
-
     private void Btn_DashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_DashboardMouseEntered
         Btn_Dashboard.setBackground(new Color(239,239,239));
     }//GEN-LAST:event_Btn_DashboardMouseEntered
@@ -1978,7 +1885,6 @@ try {
 
     private void Cari_penjualanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Cari_penjualanKeyReleased
         String key=Cari_penjualan.getText();
-          
         
         if(key!=""){
             DefaultTableModel tbl = new DefaultTableModel();
@@ -2125,36 +2031,80 @@ try {
      new form_supplier().setVisible(true);
     }//GEN-LAST:event_jPanel21MouseClicked
 
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-      try{
-        String sql = "update pembelian set id_barang='"+txt_idbarang.getText()
-                +"',id_pembayaran='"+txt_idpembayaran.getText()
-                +"',id_supplier='"+txt_idsupplier.getText()
-                +"',tgl_pembelian='"+txt_tglpembelian.getText()
-                +"' where id_pembelian='"+txt_idpembelian.getText()+"'";
-    
-     
-            pst = conn.prepareStatement(sql);
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Data telah diupdate");
-           reset_pembelian();
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }table_beli();
-    }//GEN-LAST:event_btn_updateActionPerformed
+    private void jLabel47MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel47MouseClicked
+      lempardata_layananpembelian();
+      
+    }//GEN-LAST:event_jLabel47MouseClicked
 
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-         String sql = "delete from pembelian where id_pembelian = '"+txt_idpembelian.getText()+"'";
+    private void cari_pembelianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cari_pembelianActionPerformed
+    
+    }//GEN-LAST:event_cari_pembelianActionPerformed
+
+    private void Cari_penjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cari_penjualanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Cari_penjualanActionPerformed
+
+    private void cari_pembelianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cari_pembelianKeyReleased
+ String key=cari_pembelian.getText();
+        
+        if(key!=""){
+            DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id Pembelian");
+        tbl.addColumn("Tanggal Transaksi");
+        tbl.addColumn("Jenis Total");
+        tbl.addColumn("Tunai");
+        tbl.addColumn("Kembali");
+        tbl.addColumn("ID Barang");
+        tbl.addColumn("Kuantitas");
         try {
+            String sql = "SELECT p.id_pembelian, p.tgl_pembelian,p.total,p.tunai,p.kembali,d.id_barang,d.qty,p.id_karyawan FROM pembelian p INNER JOIN detailpembelian d ON p.id_pembelian=d.id_pembelian where p.id_pembelian LIKE '%" + cari_pembelian.getText() + "%'";
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            java.sql.Statement stm = conn.createStatement();
+            java.sql.ResultSet res =  stm.executeQuery(sql);
+            while (res.next()){
+                tbl.addRow(new Object[] {
+                    res.getString(1),
+                    res.getString(2),
+                    res.getString(3),
+                    res.getString(4),
+                    res.getString(5),
+                    res.getString(6),
+                    res.getString(7),
+                });
+            }table_pembelian.setModel(tbl);
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        }else{
+            tampil_table_pembelian();
+        }
+    }//GEN-LAST:event_cari_pembelianKeyReleased
+
+    private void hapus_form_pembelianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hapus_form_pembelianMouseClicked
+       
+        try {
+            String sql = "delete from detailpembelian where id_pembelian = '"+cari_pembelian.getText()+"'";
             pst =conn.prepareStatement(sql);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "data berhasil dihapus");
-            reset_pembelian();
+            
+        } catch (Exception e) {
+            
+        }
+        try {
+            String sql = "delete from pembelian where id_pembelian = '"+cari_pembelian.getText()+"'";
+            pst =conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "data dah dihapus ngab");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "data gagal dihapus");
         }
-        table_beli();
-    }//GEN-LAST:event_btn_deleteActionPerformed
+        
+        tampil_table_pembelian();
+    }//GEN-LAST:event_hapus_form_pembelianMouseClicked
+
+    private void table_pembelianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_pembelianMouseClicked
+       klik_table_pembelian();
+    }//GEN-LAST:event_table_pembelianMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2217,12 +2167,11 @@ try {
     private javax.swing.JPanel Pembelian;
     private javax.swing.JPanel Penjualan;
     private javax.swing.JComboBox<String> box_jenis_kelamin;
-    private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_tambah;
-    private javax.swing.JButton btn_update;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField cari_pembelian;
     private javax.swing.JButton clear_barang;
     private javax.swing.JButton delete_barang;
+    private javax.swing.JLabel hapus_form_pembelian;
     private javax.swing.JLabel hapus_form_penjualan;
     private javax.swing.JTextField harga_produk;
     private javax.swing.JPanel hover_barang;
@@ -2279,13 +2228,9 @@ try {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
@@ -2327,13 +2272,8 @@ try {
     private javax.swing.JTable table_barang;
     private javax.swing.JTable table_karyawan;
     private javax.swing.JTable table_pembelian;
-    private javax.swing.JTextField txt_idbarang;
-    private javax.swing.JTextField txt_idpembayaran;
-    private javax.swing.JTextField txt_idpembelian;
-    private javax.swing.JTextField txt_idsupplier;
     private javax.swing.JTextField txt_jabatan;
     private javax.swing.JTextField txt_nama;
-    private javax.swing.JTextField txt_tglpembelian;
     private javax.swing.JButton update_barang;
     // End of variables declaration//GEN-END:variables
 
