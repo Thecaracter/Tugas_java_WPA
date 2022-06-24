@@ -75,7 +75,7 @@ public void table_penjualan(){
         tbl.addColumn("ID Barang");
         tbl.addColumn("Kuantitas");
         try {
-            String sql = "SELECT p.id_penjualan, p.tanggal_transaksi,p.total,p.tunai,p.kembali,d.id_barang,d.jumlah_penjualan,p.id_karyawan FROM penjualan p INNER JOIN detailpenjualan d ON p.id_penjualan=d.id_penjualan;";
+            String sql = "CALL tampiltablepenjualan ();";
             java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
@@ -150,7 +150,7 @@ public void tampil_table_pembelian(){
         tbl.addColumn("ID Barang");
         tbl.addColumn("Kuantitas");
         try {
-            String sql = "SELECT p.id_pembelian, p.tgl_pembelian,p.total,p.tunai,p.kembali,d.id_barang,d.qty,p.id_karyawan FROM pembelian p INNER JOIN detailpembelian d ON p.id_pembelian=d.id_pembelian;";
+            String sql = "CALL tampiltablepembelian (); ";
             java.sql.Connection conn = (Connection) Koneksi.getKoneksi();
             java.sql.Statement stm = conn.createStatement();
             java.sql.ResultSet res = stm.executeQuery(sql);
