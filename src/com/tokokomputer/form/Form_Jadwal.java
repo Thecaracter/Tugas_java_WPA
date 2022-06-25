@@ -31,7 +31,7 @@ public void kliktable(){
     }
         public void kliktable_karyawan(){
             int baris =table_tampil_karyawan.getSelectedRow();
-        txt_id_karyawan.setText((String) table_jadwal.getValueAt (baris,0));
+            txt_id_karyawan.setText((String)table_tampil_karyawan.getValueAt (baris,0));
         }
     public void tampil_table_karyawan(){
         DefaultTableModel tbl = new DefaultTableModel();
