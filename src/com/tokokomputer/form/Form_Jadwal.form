@@ -197,21 +197,24 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="12">
-                <StringItem index="0" value="Senin-Pagi"/>
-                <StringItem index="1" value="Senin-Malam"/>
-                <StringItem index="2" value="Selasa-Pagi"/>
-                <StringItem index="3" value="Selasa-Malam"/>
-                <StringItem index="4" value="Rabu-Pagi"/>
-                <StringItem index="5" value="Rabu-Malam"/>
-                <StringItem index="6" value="Kamis-Pagi"/>
-                <StringItem index="7" value="Kamis-Malam"/>
-                <StringItem index="8" value="Jumat-Pagi"/>
-                <StringItem index="9" value="Jumat-Malam"/>
-                <StringItem index="10" value="Sabtu-Pagi"/>
-                <StringItem index="11" value="Sabtu-Malam&apos;"/>
+                <StringItem index="0" value="senin pagi"/>
+                <StringItem index="1" value="senin malam"/>
+                <StringItem index="2" value="selasa pagi"/>
+                <StringItem index="3" value="selasa malam"/>
+                <StringItem index="4" value="rabu pagi"/>
+                <StringItem index="5" value="rabu malam"/>
+                <StringItem index="6" value="kamis pagi"/>
+                <StringItem index="7" value="kamis malam"/>
+                <StringItem index="8" value="jumat pagi"/>
+                <StringItem index="9" value="jumat malam"/>
+                <StringItem index="10" value="sabtu pagi"/>
+                <StringItem index="11" value="sabtu malam"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="terjadwalActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

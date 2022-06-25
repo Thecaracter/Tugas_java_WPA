@@ -203,7 +203,12 @@ public void kliktable(){
         jPanel1.add(txt_id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, 230, -1));
 
         terjadwal.setFont(new java.awt.Font("Trebuchet MS", 0, 11)); // NOI18N
-        terjadwal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Senin-Pagi", "Senin-Malam", "Selasa-Pagi", "Selasa-Malam", "Rabu-Pagi", "Rabu-Malam", "Kamis-Pagi", "Kamis-Malam", "Jumat-Pagi", "Jumat-Malam", "Sabtu-Pagi", "Sabtu-Malam'" }));
+        terjadwal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "senin pagi", "senin malam", "selasa pagi", "selasa malam", "rabu pagi", "rabu malam", "kamis pagi", "kamis malam", "jumat pagi", "jumat malam", "sabtu pagi", "sabtu malam" }));
+        terjadwal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terjadwalActionPerformed(evt);
+            }
+        });
         jPanel1.add(terjadwal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 130, 230, 40));
 
         jButton1.setText("Simpan");
@@ -365,6 +370,10 @@ public void kliktable(){
     private void table_tampil_karyawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_tampil_karyawanMouseClicked
        kliktable_karyawan();
     }//GEN-LAST:event_table_tampil_karyawanMouseClicked
+
+    private void terjadwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terjadwalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_terjadwalActionPerformed
 
     /**
      * @param args the command line arguments
