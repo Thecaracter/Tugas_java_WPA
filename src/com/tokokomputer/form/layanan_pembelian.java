@@ -235,7 +235,6 @@ new Timer(1000, taskPerformer).start();
         btnEditItem = new javax.swing.JButton();
         btnHapusItem = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
-        btnCetak = new javax.swing.JButton();
         txtJmlKembalian = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnHitungJmlKembalian = new javax.swing.JButton();
@@ -330,7 +329,7 @@ new Timer(1000, taskPerformer).start();
                 btnHapusItemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapusItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 590, 110, -1));
+        jPanel1.add(btnHapusItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 590, 110, -1));
 
         btnBatal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBatal.setText("Batalkan Transaksi");
@@ -339,16 +338,7 @@ new Timer(1000, taskPerformer).start();
                 btnBatalActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 590, 150, -1));
-
-        btnCetak.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnCetak.setText("Cetak Struk");
-        btnCetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCetakActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, -1, -1));
+        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 590, 150, -1));
 
         txtJmlKembalian.setEditable(false);
         txtJmlKembalian.setBackground(new java.awt.Color(204, 204, 204));
@@ -696,52 +686,6 @@ new Timer(1000, taskPerformer).start();
      balikdata_layananpembelian();
     }//GEN-LAST:event_btnKeluarActionPerformed
 
-    private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
-
-        if(txtJmlBayar.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Lakukan Proses Pembayaran Terlebih Dahulu!!!");
-        } else {
-            try{
-                DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
-                String totalHarga = txtJmlHarga.getText();
-                String tunai = txtJmlBayar.getText();
-                String kembalian = txtJmlKembalian.getText();
-                String[] judul = {"Nama Barang", "Harga", "Jumlah", "Total"};
-                String[][] isi = new String[tblKeranjang.getRowCount()][tblKeranjang.getColumnCount()];
-
-                for(int i = 0; i < tblKeranjang.getRowCount(); i++){
-                    for(int j = 0; j < tblKeranjang.getColumnCount(); j++){
-                        isi[i][j] = model.getValueAt(i, j).toString();
-                    }
-                }
-
-                Cetak tabel = new Cetak(judul, isi, tblKeranjang.getRowCount(), tblKeranjang.getColumnCount(), totalHarga, tunai, kembalian);
-
-                JOptionPane.showMessageDialog(rootPane, "Transaksi Selesai!!..");
-
-                txt_jenisbarang.setText("");
-                txt_HargaBarang.setText("0");
-                txt_jenisbarang.setText("0");
-                txtJmlHarga.setText("0");
-                txtJmlBayar.setText("");
-                txtJmlKembalian.setText("0");
-
-                for(int l = model.getRowCount() - 1; l >= 0; l-- ) {
-                    model.removeRow(l);
-                }
-
-                btnEditItem.setEnabled(false);
-                btnHapusItem.setEnabled(false);
-                btnTambah.setEnabled(true);
-          
-            }catch(Exception e){
-                System.out.println(e);
-            } 
-        }
-        balikdata_layananpembelian();
-        
-    }//GEN-LAST:event_btnCetakActionPerformed
-
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
   
         if(txt_namabarang.getText().equals("-- Pilih Barang --")){
@@ -946,7 +890,6 @@ new Timer(1000, taskPerformer).start();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Jam;
     private javax.swing.JButton btnBatal;
-    private javax.swing.JButton btnCetak;
     private javax.swing.JButton btnEditItem;
     private javax.swing.JButton btnHapusItem;
     private javax.swing.JButton btnHitungJmlKembalian;

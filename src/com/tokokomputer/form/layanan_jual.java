@@ -15,11 +15,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -699,47 +706,64 @@ new Timer(1000, taskPerformer).start();
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
 
-        if(txtJmlBayar.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Lakukan Proses Pembayaran Terlebih Dahulu!!!");
-        } else {
-            try{
-                DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
-                String totalHarga = txtJmlHarga.getText();
-                String tunai = txtJmlBayar.getText();
-                String kembalian = txtJmlKembalian.getText();
-                String[] judul = {"Nama Barang", "Harga", "Jumlah", "Total"};
-                String[][] isi = new String[tblKeranjang.getRowCount()][tblKeranjang.getColumnCount()];
+//        if(txtJmlBayar.getText().equals("")){
+//            JOptionPane.showMessageDialog(rootPane, "Lakukan Proses Pembayaran Terlebih Dahulu!!!");
+//        } else {
+//            try{
+//                DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
+//                String totalHarga = txtJmlHarga.getText();
+//                String tunai = txtJmlBayar.getText();
+//                String kembalian = txtJmlKembalian.getText();
+//                String[] judul = {"Nama Barang", "Harga", "Jumlah", "Total"};
+//                String[][] isi = new String[tblKeranjang.getRowCount()][tblKeranjang.getColumnCount()];
+//
+//                for(int i = 0; i < tblKeranjang.getRowCount(); i++){
+//                    for(int j = 0; j < tblKeranjang.getColumnCount(); j++){
+//                        isi[i][j] = model.getValueAt(i, j).toString();
+//                    }
+//                }
+//
+//                Cetak tabel = new Cetak(judul, isi, tblKeranjang.getRowCount(), tblKeranjang.getColumnCount(), totalHarga, tunai, kembalian);
+//
+//                JOptionPane.showMessageDialog(rootPane, "Transaksi Selesai!!..");
+//
+//                txt_jenisbarang.setText("");
+//                txt_HargaBarang.setText("0");
+//                txt_jenisbarang.setText("0");
+//                txtJmlHarga.setText("0");
+//                txtJmlBayar.setText("");
+//                txtJmlKembalian.setText("0");
+//
+//                for(int l = model.getRowCount() - 1; l >= 0; l-- ) {
+//                    model.removeRow(l);
+//                }
+//
+//                btnEditItem.setEnabled(false);
+//                btnHapusItem.setEnabled(false);
+//                btnTambah.setEnabled(true);
+//          
+//            }catch(Exception e){
+//                System.out.println(e);
+//            } 
+//        }
+//        balikd ata_layananjual();
 
-                for(int i = 0; i < tblKeranjang.getRowCount(); i++){
-                    for(int j = 0; j < tblKeranjang.getColumnCount(); j++){
-                        isi[i][j] = model.getValueAt(i, j).toString();
-                    }
-                }
-
-                Cetak tabel = new Cetak(judul, isi, tblKeranjang.getRowCount(), tblKeranjang.getColumnCount(), totalHarga, tunai, kembalian);
-
-                JOptionPane.showMessageDialog(rootPane, "Transaksi Selesai!!..");
-
-                txt_jenisbarang.setText("");
-                txt_HargaBarang.setText("0");
-                txt_jenisbarang.setText("0");
-                txtJmlHarga.setText("0");
-                txtJmlBayar.setText("");
-                txtJmlKembalian.setText("0");
-
-                for(int l = model.getRowCount() - 1; l >= 0; l-- ) {
-                    model.removeRow(l);
-                }
-
-                btnEditItem.setEnabled(false);
-                btnHapusItem.setEnabled(false);
-                btnTambah.setEnabled(true);
-          
-            }catch(Exception e){
-                System.out.println(e);
-            } 
+        String id_penjualan = txt_id_penjualan.getText();
+        JasperReport report;
+        String path = ".\\src\\Report\\report1.jasper";
+        try {
+            HashMap ha = new HashMap();
+            ha.put("id_penjualan", id_penjualan);
+            report = (JasperReport) JRLoader.loadObjectFromFile(path);
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            JasperPrint jprint = JasperFillManager.fillReport(path, ha, conn);
+            JasperViewer jviewer = new JasperViewer(jprint, false);
+            jviewer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            jviewer.setVisible(true);
+            
+        } catch (Exception e) {
+            System.out.println("error print " + e);
         }
-        balikdata_layananjual();
         
     }//GEN-LAST:event_btnCetakActionPerformed
 
