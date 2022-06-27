@@ -296,30 +296,23 @@ new Timer(1000, taskPerformer).start();
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 550, 500));
 
         jPanel1.setBackground(new java.awt.Color(15, 247, 147));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel1.setText("Id penjualan");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         txt_id_barang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_id_barangActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_id_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 140, -1));
 
         jLabel9.setText("Jam :");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 30, -1));
 
         Jam.setText("00.00.00");
-        jPanel1.add(Jam, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 70, -1));
 
         jLabel11.setText("ID Karyawan :");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
         id_karyawan.setText("0");
-        jPanel1.add(id_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 10, 70, -1));
 
         btnEditItem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditItem.setText("Edit Item");
@@ -329,7 +322,6 @@ new Timer(1000, taskPerformer).start();
                 btnEditItemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 110, -1));
 
         btnHapusItem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnHapusItem.setText("Hapus Item");
@@ -339,7 +331,6 @@ new Timer(1000, taskPerformer).start();
                 btnHapusItemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHapusItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 110, -1));
 
         btnBatal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBatal.setText("Batalkan Transaksi");
@@ -348,7 +339,6 @@ new Timer(1000, taskPerformer).start();
                 btnBatalActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 540, 150, -1));
 
         btnCetak.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCetak.setText("Cetak Struk");
@@ -357,7 +347,6 @@ new Timer(1000, taskPerformer).start();
                 btnCetakActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
 
         txtJmlKembalian.setEditable(false);
         txtJmlKembalian.setBackground(new java.awt.Color(204, 204, 204));
@@ -368,11 +357,9 @@ new Timer(1000, taskPerformer).start();
                 txtJmlKembalianActionPerformed(evt);
             }
         });
-        jPanel1.add(txtJmlKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 140, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Kembalian");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
 
         btnHitungJmlKembalian.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnHitungJmlKembalian.setText("Jumlah Kembalian");
@@ -381,7 +368,6 @@ new Timer(1000, taskPerformer).start();
                 btnHitungJmlKembalianActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHitungJmlKembalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 190, -1));
 
         txtJmlBayar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtJmlBayar.addActionListener(new java.awt.event.ActionListener() {
@@ -394,15 +380,12 @@ new Timer(1000, taskPerformer).start();
                 txtJmlBayarKeyReleased(evt);
             }
         });
-        jPanel1.add(txtJmlBayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 140, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Tunai");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Total");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 30, -1));
 
         txtJmlHarga.setEditable(false);
         txtJmlHarga.setBackground(new java.awt.Color(204, 204, 204));
@@ -413,7 +396,6 @@ new Timer(1000, taskPerformer).start();
                 txtJmlHargaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtJmlHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 140, -1));
 
         btnTambah.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnTambah.setText("Tambah Ke Keranjang");
@@ -422,7 +404,6 @@ new Timer(1000, taskPerformer).start();
                 btnTambahActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 190, -1));
 
         txt_jumlahbeli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_jumlahbeli.setText("1");
@@ -436,21 +417,17 @@ new Timer(1000, taskPerformer).start();
                 txt_jumlahbeliKeyReleased(evt);
             }
         });
-        jPanel1.add(txt_jumlahbeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Kuantitas");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Harga Barang");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
 
         txt_HargaBarang.setEditable(false);
         txt_HargaBarang.setBackground(new java.awt.Color(204, 204, 204));
         txt_HargaBarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_HargaBarang.setText("0");
-        jPanel1.add(txt_HargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 140, -1));
 
         txt_jenisbarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_jenisbarang.addActionListener(new java.awt.event.ActionListener() {
@@ -463,15 +440,12 @@ new Timer(1000, taskPerformer).start();
                 txt_jenisbarangKeyReleased(evt);
             }
         });
-        jPanel1.add(txt_jenisbarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 140, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Jenis Barang");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nama Barang");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
         txt_namabarang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_namabarang.addActionListener(new java.awt.event.ActionListener() {
@@ -484,7 +458,6 @@ new Timer(1000, taskPerformer).start();
                 txt_namabarangKeyReleased(evt);
             }
         });
-        jPanel1.add(txt_namabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 140, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Clear");
@@ -493,7 +466,6 @@ new Timer(1000, taskPerformer).start();
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, -1, -1));
 
         btnKeluar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnKeluar.setText("Keluar");
@@ -502,21 +474,17 @@ new Timer(1000, taskPerformer).start();
                 btnKeluarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 100, -1));
 
         txt_id_penjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_id_penjualanActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_id_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 140, -1));
 
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel10.setText("Id Barang");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
         tanggal_beli.setText("00.00.00");
-        jPanel1.add(tanggal_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         tampil_barang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -536,8 +504,6 @@ new Timer(1000, taskPerformer).start();
         });
         jScrollPane1.setViewportView(tampil_barang);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, 100));
-
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -552,7 +518,157 @@ new Timer(1000, taskPerformer).start();
                 jTextField1KeyReleased(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 150, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tanggal_beli)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(Jam, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(260, 260, 260)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(400, 400, 400)
+                .addComponent(jLabel11)
+                .addGap(19, 19, 19)
+                .addComponent(id_karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addGap(82, 82, 82)
+                .addComponent(txt_id_penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel10)
+                .addGap(102, 102, 102)
+                .addComponent(txt_id_barang, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel2)
+                .addGap(78, 78, 78)
+                .addComponent(txt_namabarang, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButton1)
+                .addGap(17, 17, 17)
+                .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel3)
+                .addGap(84, 84, 84)
+                .addComponent(txt_jenisbarang, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel8)
+                .addGap(77, 77, 77)
+                .addComponent(txt_HargaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel5)
+                .addGap(104, 104, 104)
+                .addComponent(txt_jumlahbeli, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel4)
+                .addGap(130, 130, 130)
+                .addComponent(txtJmlHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel7)
+                .addGap(127, 127, 127)
+                .addComponent(txtJmlBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel6)
+                .addGap(99, 99, 99)
+                .addComponent(txtJmlKembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnHitungJmlKembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnEditItem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnHapusItem, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btnCetak))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(tanggal_beli)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(Jam))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11)
+                    .addComponent(id_karyawan))
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_id_penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(txt_id_barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_namabarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(btnKeluar))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_jenisbarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_HargaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_jumlahbeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambah))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtJmlHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(txtJmlBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtJmlKembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHitungJmlKembalian))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEditItem)
+                    .addComponent(btnHapusItem)
+                    .addComponent(btnBatal)
+                    .addComponent(btnCetak)))
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 600));
 
@@ -706,51 +822,10 @@ new Timer(1000, taskPerformer).start();
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
 
-//        if(txtJmlBayar.getText().equals("")){
-//            JOptionPane.showMessageDialog(rootPane, "Lakukan Proses Pembayaran Terlebih Dahulu!!!");
-//        } else {
-//            try{
-//                DefaultTableModel model = (DefaultTableModel) tblKeranjang.getModel();
-//                String totalHarga = txtJmlHarga.getText();
-//                String tunai = txtJmlBayar.getText();
-//                String kembalian = txtJmlKembalian.getText();
-//                String[] judul = {"Nama Barang", "Harga", "Jumlah", "Total"};
-//                String[][] isi = new String[tblKeranjang.getRowCount()][tblKeranjang.getColumnCount()];
-//
-//                for(int i = 0; i < tblKeranjang.getRowCount(); i++){
-//                    for(int j = 0; j < tblKeranjang.getColumnCount(); j++){
-//                        isi[i][j] = model.getValueAt(i, j).toString();
-//                    }
-//                }
-//
-//                Cetak tabel = new Cetak(judul, isi, tblKeranjang.getRowCount(), tblKeranjang.getColumnCount(), totalHarga, tunai, kembalian);
-//
-//                JOptionPane.showMessageDialog(rootPane, "Transaksi Selesai!!..");
-//
-//                txt_jenisbarang.setText("");
-//                txt_HargaBarang.setText("0");
-//                txt_jenisbarang.setText("0");
-//                txtJmlHarga.setText("0");
-//                txtJmlBayar.setText("");
-//                txtJmlKembalian.setText("0");
-//
-//                for(int l = model.getRowCount() - 1; l >= 0; l-- ) {
-//                    model.removeRow(l);
-//                }
-//
-//                btnEditItem.setEnabled(false);
-//                btnHapusItem.setEnabled(false);
-//                btnTambah.setEnabled(true);
-//          
-//            }catch(Exception e){
-//                System.out.println(e);
-//            } 
-//        }
-//        balikd ata_layananjual();
 
-        String id_penjualan = txt_id_penjualan.getText();
+        String id_penjualan = txt_id_penjualan.getText().toString();
         JasperReport report;
-        String path = ".\\src\\Report\\report1.jasper";
+        String path = ".\\src\\Report\\report2.jasper";
         try {
             HashMap ha = new HashMap();
             ha.put("id_penjualan", id_penjualan);
@@ -764,7 +839,7 @@ new Timer(1000, taskPerformer).start();
         } catch (Exception e) {
             System.out.println("error print " + e);
         }
-        
+        balikdata_layananjual();
     }//GEN-LAST:event_btnCetakActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed

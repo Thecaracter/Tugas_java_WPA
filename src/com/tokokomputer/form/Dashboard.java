@@ -11,9 +11,16 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -331,6 +338,23 @@ public void lempardata_layananpembelian(){
         jPanel21 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         Main_Form = new javax.swing.JPanel();
+        Penjualan = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        penjualan = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        Cari_penjualan = new javax.swing.JTextField();
+        hapus_form_penjualan = new javax.swing.JLabel();
+        btn_cetak = new javax.swing.JButton();
         Pegawai = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -381,22 +405,6 @@ public void lempardata_layananpembelian(){
         jLabel47 = new javax.swing.JLabel();
         cari_pembelian = new javax.swing.JTextField();
         hapus_form_pembelian = new javax.swing.JLabel();
-        Penjualan = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        penjualan = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        Cari_penjualan = new javax.swing.JTextField();
-        hapus_form_penjualan = new javax.swing.JLabel();
         Barang = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -798,6 +806,151 @@ public void lempardata_layananpembelian(){
 
         Main_Form.setBackground(new java.awt.Color(255, 255, 255));
         Main_Form.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Penjualan.setBackground(new java.awt.Color(255, 255, 255));
+        Penjualan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel6.setBackground(new java.awt.Color(0, 204, 153));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
+
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/penjulan.png"))); // NOI18N
+
+        jLabel29.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel29.setText("Penjualan");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel28)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel29))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
+                .addGap(0, 42, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addGap(18, 18, 18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        Penjualan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
+
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel13.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel41.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel41.setText("ID Karyawan =");
+
+        jLabel42.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel42.setText("0");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel42)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel41)
+                .addComponent(jLabel42))
+        );
+
+        jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 0, -1, -1));
+
+        penjualan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                penjualanMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(penjualan);
+
+        jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 550, 430));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/sales_bag_shopping_bargain_retail_icon-icons.com_55340.png"))); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel12MousePressed(evt);
+            }
+        });
+        jPanel13.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel54.setText("Jumlah Kembalian");
+        jPanel13.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 323, -1, -1));
+
+        Cari_penjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cari_penjualanActionPerformed(evt);
+            }
+        });
+        Cari_penjualan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Cari_penjualanKeyReleased(evt);
+            }
+        });
+        jPanel13.add(Cari_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 140, -1));
+
+        hapus_form_penjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/tempat sampah.png"))); // NOI18N
+        hapus_form_penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hapus_form_penjualanMouseClicked(evt);
+            }
+        });
+        jPanel13.add(hapus_form_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+
+        btn_cetak.setText("Cetak");
+        btn_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cetakActionPerformed(evt);
+            }
+        });
+        jPanel13.add(btn_cetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, 80, -1));
+
+        jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 540));
+
+        Penjualan.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 550));
+
+        Main_Form.add(Penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 660));
 
         Pegawai.setBackground(new java.awt.Color(255, 255, 255));
         Pegawai.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1225,143 +1378,6 @@ public void lempardata_layananpembelian(){
 
         Main_Form.add(Pembelian, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
 
-        Penjualan.setBackground(new java.awt.Color(255, 255, 255));
-        Penjualan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel6.setBackground(new java.awt.Color(0, 204, 153));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.tokokomputer.icons/Rectangle 17.png"))); // NOI18N
-
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/penjulan.png"))); // NOI18N
-
-        jLabel29.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel29.setText("Penjualan");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel28)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel29))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel8)))
-                .addGap(0, 42, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel29)
-                        .addGap(18, 18, 18)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        Penjualan.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 110));
-
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel13.setBackground(new java.awt.Color(255, 204, 153));
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel41.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel41.setText("ID Karyawan =");
-
-        jLabel42.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel42.setText("0");
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel41)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel42)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel41)
-                .addComponent(jLabel42))
-        );
-
-        jPanel13.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 0, -1, -1));
-
-        penjualan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                penjualanMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(penjualan);
-
-        jPanel13.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 550, 430));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/sales_bag_shopping_bargain_retail_icon-icons.com_55340.png"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel12MousePressed(evt);
-            }
-        });
-        jPanel13.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel54.setText("Jumlah Kembalian");
-        jPanel13.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 323, -1, -1));
-
-        Cari_penjualan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Cari_penjualanActionPerformed(evt);
-            }
-        });
-        Cari_penjualan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Cari_penjualanKeyReleased(evt);
-            }
-        });
-        jPanel13.add(Cari_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 140, -1));
-
-        hapus_form_penjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tokokomputer/icons2/tempat sampah.png"))); // NOI18N
-        hapus_form_penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hapus_form_penjualanMouseClicked(evt);
-            }
-        });
-        jPanel13.add(hapus_form_penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
-
-        jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 540));
-
-        Penjualan.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, 550));
-
-        Main_Form.add(Penjualan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 660));
-
         Barang.setBackground(new java.awt.Color(255, 255, 255));
         Barang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1544,7 +1560,7 @@ public void lempardata_layananpembelian(){
                         .addComponent(simpan_barang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(update_barang)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(delete_barang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(clear_barang)))
@@ -2107,6 +2123,25 @@ public void lempardata_layananpembelian(){
        klik_table_pembelian();
     }//GEN-LAST:event_table_pembelianMouseClicked
 
+    private void btn_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cetakActionPerformed
+     String id_penjualan = Cari_penjualan.getText().toString();
+        JasperReport report;
+        String path = ".\\src\\Report\\report2.jasper";
+        try {
+            HashMap ha = new HashMap();
+            ha.put("id_penjualan", id_penjualan);
+            report = (JasperReport) JRLoader.loadObjectFromFile(path);
+            java.sql.Connection conn =(Connection) Koneksi.getKoneksi();
+            JasperPrint jprint = JasperFillManager.fillReport(path, ha, conn);
+            JasperViewer jviewer = new JasperViewer(jprint, false);
+            jviewer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            jviewer.setVisible(true);
+            
+        } catch (Exception e) {
+            System.out.println("error print " + e);
+        }
+    }//GEN-LAST:event_btn_cetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2168,6 +2203,7 @@ public void lempardata_layananpembelian(){
     private javax.swing.JPanel Pembelian;
     private javax.swing.JPanel Penjualan;
     private javax.swing.JComboBox<String> box_jenis_kelamin;
+    private javax.swing.JButton btn_cetak;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField cari_pembelian;
     private javax.swing.JButton clear_barang;
